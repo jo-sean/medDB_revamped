@@ -2,6 +2,11 @@
 ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
 }
 
 .App-header {
@@ -37,6 +42,7 @@ body {
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #000000;
   display: flex;
+  text-align: center;
   flex-direction: column;
   align-items: center;
   justify-content: center
@@ -48,6 +54,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem; 
   font-weight: 600;
+  text-align: center;
+  align-items: center;
 }
 h1 { font-size: 4.0rem; line-height: 1.2;  letter-spacing: -.1rem;}
 h2 { font-size: 3.4rem; line-height: 1.25; letter-spacing: -.1rem; }
@@ -111,6 +119,7 @@ nav {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  align-items: center;
 }
 
 caption {
@@ -126,13 +135,16 @@ caption {
 th {
   background-color: #B8DDE1;
   color: #0D5257;
+  align-items: center;
 }
 
 th,
 td {
   padding: 8px 36px;
   text-align: left;
-  border-bottom: 2px solid #003B5C; }
+  border-bottom: 2px solid #003B5C;
+  align-items: center;
+  }
 
 tr:hover {
   background-color: #FDD26E;
@@ -208,6 +220,7 @@ tr:last-child {
   margin: -2rem;
   max-width:50%;
   height:100px;
+
 }
 
 .search-med {
