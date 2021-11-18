@@ -49,19 +49,19 @@
                 </tr>
             </thead>
             <tbody>
-                    {% for row in pt_info %}
-                    <tr>
-                        <td>{{row['patient_id']}}</td>
-                        <td>{{row['first_name']}}</td>
-                        <td>{{row['last_name']}}</td>
-                        <td>{{row['phone']}}</td>
-                        <td>{{row['street_number']}}</td>
-                        <td>{{row['street_name']}}</td>
-                        <td>{{row['zip_code']}}</td>
-                        <td><button type="button">Edit</button></td>
-                        <td><button type="button">Delete</button></td>
-                    </tr>
-                    {% endfor %}
+                {% for row in pt_info %}
+                <tr>
+                    <td>{{row['patient_id']}}</td>
+                    <td>{{row['first_name']}}</td>
+                    <td>{{row['last_name']}}</td>
+                    <td>{{row['phone']}}</td>
+                    <td>{{row['street_number']}}</td>
+                    <td>{{row['street_name']}}</td>
+                    <td>{{row['zip_code']}}</td>
+                    <td><button type="button">Edit</button></td>
+                    <td><button type="button">Delete</button></td>
+                </tr>
+                {% endfor %}
             </tbody>
             <tfoot>
             </tfoot>
@@ -75,11 +75,11 @@
         <form action="/patients" method="post">
             <fieldset>
             <input class="input-attribute" type="text" placeholder="first_name" name="first_name"/>
-            <input class="input-attribute" type="text" placeholder="last_name" name="first_name"/>
-            <input class="input-attribute" type="number" maxlength="10" placeholder="phone" name="first_name" />
-            <input class="input-attribute" type="number" placeholder="street_number" name="first_name" />
-            <input class="input-attribute" type="text" placeholder="street_name" name="first_name" />
-            <input class="input-attribute" type="number" maxlength="5" placeholder="zip_code" name="first_name" />
+            <input class="input-attribute" type="text" placeholder="last_name" name="last_name"/>
+            <input class="input-attribute" type="number" maxlength="10" placeholder="phone" name="phone" />
+            <input class="input-attribute" type="number" placeholder="street_number" name="street_number" />
+            <input class="input-attribute" type="text" placeholder="street_name" name="street_name" />
+            <input class="input-attribute" type="number" maxlength="5" placeholder="zip_code" name="zip_code" />
             <div class="button-container">
                 <input type="submit" id="add_patients" value="Add Patient">
             </div>
