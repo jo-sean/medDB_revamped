@@ -6,7 +6,7 @@ SELECT * FROM medications
 ORDER BY drug_name;
  
 -- add a new medication
-INSERT INTO medications (drug_name, doseage_form, dose_number, dose_unit, quantity)
+INSERT INTO medications (drug_name, dosage_form, dose_number, dose_unit, quantity)
 VALUES (:medName, :medForm, :medDose, :medUnit, :medQuantity);
  
 -- edit existing medication entry

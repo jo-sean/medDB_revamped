@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS `Medications`;
 CREATE TABLE `Medications` (
     `medication_id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `drug_name` varchar(255) NOT NULL,
-    `doseage_form` varchar(255) DEFAULT NULL,
+    `dosage_form` varchar(255) DEFAULT NULL,
     `dose_number` int(11) NOT NULL,
     `dose_unit` varchar(255) DEFAULT NULL,
     `quantity` int(11) NOT NULL
@@ -30,7 +30,7 @@ CREATE TABLE `Medications` (
 -- Insert sample data
 LOCK TABLES `Medications` WRITE;
  
-INSERT INTO `Medications` (`medication_id`, `drug_name`, `doseage_form`, `dose_number`, `dose_unit`, `quantity`)
+INSERT INTO `Medications` (`medication_id`, `drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`)
 VALUES (1,'metoprolol','tablet',25,'mg',180), (2,'glipizide','tablet',10,'mg',90);
  
 UNLOCK TABLES;
