@@ -56,7 +56,7 @@
                     <tr>
                         <td>{{row['medication_id']}}</td>
                         <td>{{row['drug_name']}}</td>
-                        <td>{{row['doseage_form']}}</td>
+                        <td>{{row['dosage_form']}}</td>
                         <td>{{row['dose_number']}}</td>
                         <td>{{row['dose_unit']}}</td>
                         <td>{{row['quantity']}}</td>
@@ -73,14 +73,16 @@
                 <h2 class="page-title">Add Medication</h2>
             </div>
             <form action="/medications" method="post">
+                <fieldset>
                 <input class="input-attribute" type="text" placeholder="drug name" name="drug_name" >
-                <input class="input-attribute" type="text" placeholder="dose form" name="doseage_form" >
+                <input class="input-attribute" type="text" placeholder="dose form" name="dosage_form" >
                 <input class="input-attribute" type="number" placeholder="dose number" name="dose_number" >
                 <input class="input-attribute" type="text" placeholder="dose unit" name="dose_unit" >
                 <input class="input-attribute" type="number" placeholder="quantity" name="quantity" >
                 <div class="button-container">
                     <input type="submit" id="add_meds" value="Add Medication">
                 </div>
+                    </fieldset>
             </form>
     </div>
 </body>

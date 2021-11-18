@@ -23,12 +23,15 @@
         </nav>
     </div>
 
-    <div>
+
         <div>
-            <h2 class="page-title">Prescriptions</h2>
+            <h2 class="page-title"></h2>
         </div>
-        <div>
-            <table>
+     <section>
+         <table id="prescriptions">
+            <caption>
+                Prescriptions
+            </caption>
                 <thead>
                     <tr>
                         <th>prescription_id</th>
@@ -40,51 +43,37 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <!-- {/* below is sample data to show the structure of the table -- delete when we integrate DB*/} -->
+                    {% for pres in prescription_info  %}
                     <tr>
-                        <td>0011</td>
-                        <td>0101</td>
-                        <td>0001</td>
-                        <td>90</td>
+                        <td>{{pres['prescription_id']}}</td>
+                        <td>{{pres['patient_id']}}</td>
+                        <td>{{pres['medication_id']}}</td>
+                        <td>{{pres['quantity']}}</td>
                         <td><button type="button">Edit</button></td>
                         <td><button type="button">Delete</button></td>
                     </tr>
-                    <tr>
-                        <td>0012</td>
-                        <td>0101</td>
-                        <td>0002</td>
-                        <td>30</td>
-                        <td><button type="button">Edit</button></td>
-                        <td><button type="button">Delete</button></td>
-                    </tr>
-
-                    <!-- {prescriptions.map((prescription, i) => (
-                <Prescription Prescription={Prescription} onDelete={onDelete} onEdit={onEdit} key={i} />
-                ))} -->
+                   {% endfor %}
                 </tbody>
+             <tfoot>
+            </tfoot>
             </table>
+    </section>
 
-
-        </div>
-        <div class="button-container">
+    <section>
             <div>
                 <h2 class="page-title">Add Prescription</h2>
             </div>
-            <div>
+            <form action="/prescriptions" method="post">
+                <fieldset>
                 <input class="input-attribute" type="text" placeholder="Enter patient ID" name="patient_id" />
-                <!-- onChange={(e) => setPatientId(e.target.value)} -->
                 <input class="input-attribute" type="text" name="medication_id" placeholder="Enter medication ID" />
-                <!-- onChange={(e) => setMedId(e.target.value)} -->
                 <input class="input-attribute" type="number" placeholder="Enter quantity" name="qty" />
-                <!-- onChange={(e) => setQty(e.target.value)} -->
-            </div>
             <div class="button-container">
-                <button id="submit-button" onClick={addPrescription}>
-                    Add
-                </button>
+                <input type="submit" id="add_prescription" value="Add Prescription">
             </div>
-        </div>
+            </fieldset>
+                </form>
+        </section>
 
 
     </div>

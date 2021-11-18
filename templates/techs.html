@@ -39,21 +39,23 @@
                     <th>employee_id</th>
                     <th>first_name</th>
                     <th>last_name</th>
-                    <th></th>
-                    <th></th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
+            {% for tech in tech_info %}
                 <tr>
-                    <td>99</td>
-                    <td>Wayne</td>
-                    <td>Gretzky</td>
+                    <td>{{tech['employee_id']}}</td>
+                    <td>{{tech['first_name'}}</td>
+                    <td>{{tech['last_name'}}</td>
                     <td><button type="button">Edit</button></td>
                     <td><button type="button">Delete</button></td>
                 </tr>
+            {% endfor %}
             </tbody>
-            <tfoot>
-            </tfoot>
+<!--            <tfoot>-->
+<!--            </tfoot>-->
         </table>
     </section>
 

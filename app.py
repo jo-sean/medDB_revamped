@@ -1,354 +1,252 @@
 from flask import Flask, render_template, request, redirect, url_for, json
-from flask_mysqldb import MySQL
-import dbconfig
-
 import os
 from flask.helpers import url_for
 from werkzeug.utils import redirect
-# import database.db_connector as db
+import database.db_connector as db
 
 # Configuration
-# Accessible ports: 1024 < PORT < 65535
-Port = 8645  # designates what port to host on
-###Change back to 0.0.0.0
-hostingURL = '127.0.0.1'  # designates what url to host on
+app = Flask(__name__)
 
-app = Flask(__name__,
-            static_folder='static',
-            template_folder='templates')
-
-app.config['MYSQL_HOST'] = dbconfig.host
-app.config['MYSQL_USER'] = dbconfig.user
-app.config['MYSQL_PASSWORD'] = dbconfig.passwd
-app.config['MYSQL_DB'] = dbconfig.db
-
-mysql = MySQL(app)
+# Connect to database when server is started
+db_connection = db.connect_to_database()
 
 
-# def get_clients():
-#     """
-#     :return: tuple of all client information in form (clientID, firstName, lastName, dietician, trainer)
-#     """
-#     cur = mysql.connection.cursor()
-#     users = cur.execute("SELECT * FROM Clients")
-#     # if users > 0:
-#     clientDetails = cur.fetchall()
-#     cur.close()
-#     return clientDetails
-#
-#
-# def get_trainers():
-#     """
-#     :return: tuple of all trainer information in form (empID, empFirstName, empLastName)
-#     """
-#     cur = mysql.connection.cursor()
-#     trainer_tuples = cur.execute("SELECT * FROM Trainers")
-#     trainer_tuples = cur.fetchall()
-#     cur.close()
-#     return trainer_tuples
-#
-#
-# def get_dieticians():
-#     """
-#     :return: tuple of dietician information in form (rdID, rdFirstName, rdLastName, diabeticEd)
-#     """
-#     cur = mysql.connection.cursor()
-#     dieticians = cur.execute("SELECT * FROM Dieticians")
-#     dieticians = cur.fetchall()
-#     cur.close()
-#     return dieticians
-#
-#
-# """
-# Client Page
-#
-# Features:
-#     Create Client
-#     Display Clients
-#     Remove Clients - work in progress
-# """
-#
-#
-# # remove client from client page
-#
-# # -----add remove client stuff here-----#
-# @app.route('/remove_client', methods=['GET', 'POST'])
-# def remove_client():
-#     if request.method == "POST":
-#         clientID = request.form['to_delete']
-#         cur = mysql.connection.cursor()
-#         cur.execute("DELETE FROM Clients WHERE clientID = %s", (clientID,))
-#         mysql.connection.commit()
-#         cur.close()
-#     return redirect(url_for("displayClients"))
-#
-#
-# # Filter clients by trainer
-# @app.route("/filter_clients", methods=["GET", "POST"])
-# def filterClients():
-#     if request.method == "POST":
-#         trainerID = request.form['trainers']
-#
-#         # Filter clients by trainerID
-#         cur = mysql.connection.cursor()
-#         trainer_clients = cur.execute("SELECT firstName, lastName FROM Clients WHERE trainer = %s", (trainerID,))
-#         trainer_clients = cur.fetchall()
-#         cur.close()
-#
-#         # get trainer name from trainerID (there's gotta be an easier way to do this)
-#         cur = mysql.connection.cursor()
-#         trainer_name = cur.execute("SELECT empFirstName, empLastName FROM Trainers WHERE empID = %s", (trainerID,))
-#         trainer_name = cur.fetchone()
-#         cur.close()
-#
-#     return render_template("clients_by_trainer.html", trainer_clients=trainer_clients, trainer_name=trainer_name)
-#
-#
-# # display clients on client page
-# @app.route('/')
-# def displayClients():
-#     # get list of clients
-#     clientDetails = get_clients()
-#
-#     # get list of trainers
-#     trainers = get_trainers()
-#
-#     # get list of dieticians
-#     dieticians = get_dieticians()
-#
-#     return render_template('clients.html', clientDetails=clientDetails, trainers=trainers, dieticians=dieticians)
-#
-#
-# # create client on client page
-# @app.route('/', methods=['GET', 'POST'])
-# def createClient():
-#     if request.method == 'POST':
-#         lastName = request.form['lastName']
-#         firstName = request.form['firstName']
-#         trainer = request.form['trainer_list']
-#         dietician = request.form['dietician_list']
-#
-#         cur = mysql.connection.cursor()
-#         cur.execute("SET FOREIGN_KEY_CHECKS=0")
-#         if dietician == "NULL":
-#             cur.execute("INSERT INTO Clients(lastName, firstName, trainer, dietician) VALUES(%s, %s, %s, NULL)",
-#                         (lastName, firstName, trainer))
-#         else:
-#             cur.execute("INSERT INTO Clients(lastName, firstName, trainer, dietician) VALUES(%s, %s, %s, %s)",
-#                         (lastName, firstName, trainer, dietician))
-#         cur.execute("SET FOREIGN_KEY_CHECKS=1")
-#         mysql.connection.commit()
-#
-#         cur.close()
-#
-#     return redirect(url_for("displayClients"))
-#
-#
-# """
-# Trainer Page
-#
-# Features:
-#     Create Trainer
-#     Display Trainer
-#     Remove Trainer - work in progress
-# """
-#
-#
-# # remove trainers from trainers page
-#
-# # -----add remove trainers stuff here-----#
-# @app.route('/remove_trainer', methods=["GET", "POST"])
-# def removeTrainer():
-#     if request.method == "POST":
-#         trainerID = request.form['to_delete']
-#         cur = mysql.connection.cursor()
-#         cur.execute("DELETE FROM Trainers WHERE empID = %s", (trainerID,))
-#         mysql.connection.commit()
-#         cur.close()
-#     return redirect(url_for("displayTrainers"))
-#
-#
-# # display trainers on trainers page
-# @app.route('/trainers.html')
-# def displayTrainers():
-#     cur = mysql.connection.cursor()
-#
-#     users = cur.execute("SELECT * FROM Trainers")
-#
-#     # if trainers > 0:
-#     trainerDetails = cur.fetchall()
-#
-#     cur.close()
-#
-#     return render_template('trainers.html', trainerDetails=trainerDetails)
-#
-#
-# # create trainer on trainers page
-# @app.route('/trainers.html', methods=['GET', 'POST'])
-# def createTrainer():
-#     if request.method == 'POST':
-#         empLastName = request.form['empLastName']
-#         empFirstName = request.form['empFirstName']
-#
-#         cur = mysql.connection.cursor()
-#
-#         cur.execute("INSERT INTO Trainers (empLastName, empFirstName) VALUES(%s, %s)", (empLastName, empFirstName))
-#
-#         mysql.connection.commit()
-#
-#         cur.close()
-#
-#     return displayTrainers()
-#
-#
-# """
-# Dietician Page
-#
-# Features:
-#     Create Dietician
-#     Display Dietician
-#     Remove Dietician - work in progress
-# """
-#
-#
-# # remove Dieticians from Dieticians page
-#
-# # -----add remove Dieticians stuff here-----#
-#
-#
-# # display Dieticians on Dieticians page
-# @app.route('/dieticians.html')
-# def displayDieticians():
-#     cur = mysql.connection.cursor()
-#
-#     users = cur.execute("SELECT * FROM Dieticians")
-#
-#     # if Dieticians > 0:
-#     dieticianDetails = cur.fetchall()
-#
-#     cur.close()
-#
-#     return render_template('dieticians.html', dieticianDetails=dieticianDetails)
-#
-#
-# # create Dietician on Dieticians page
-# @app.route('/dieticians.html', methods=['GET', 'POST'])
-# def createDietician():
-#     if request.method == 'POST':
-#         rdLastName = request.form['rdLastName']
-#         rdFirstName = request.form['rdFirstName']
-#         diabeticEd = request.form['diabeticEd']
-#
-#         cur = mysql.connection.cursor()
-#
-#         cur.execute("INSERT INTO Dieticians (rdLastName, rdFirstName, diabeticEd) VALUES(%s, %s, %s)",
-#                     (rdLastName, rdFirstName, diabeticEd))
-#
-#         mysql.connection.commit()
-#
-#         cur.close()
-#
-#     return displayDieticians()
-#
-#
-# """
-# Exercise Page
-#
-# Features:
-#     Create Exercise
-#     Display Exercise
-#     Remove Exercise - work in progress
-# """
-#
-#
-# # remove Exercises from Exercises page
-#
-# # -----add remove Exercises stuff here-----#
-#
-#
-# # display Exercises on Exercises page
-# @app.route('/exercise-library.html')
-# def displayExercises():
-#     cur = mysql.connection.cursor()
-#
-#     users = cur.execute("SELECT * FROM Exercise")
-#
-#     # if Exercises > 0:
-#     exerciseDetails = cur.fetchall()
-#
-#     cur.close()
-#
-#     return render_template('exercise-library.html', exerciseDetails=exerciseDetails)
-#
-#
-# # create Exercise on Exercises page
-# @app.route('/exercise-library.html', methods=['GET', 'POST'])
-# def createExercise():
-#     if request.method == 'POST':
-#         exName = request.form['exName']
-#         primaryMover = request.form['primaryMover']
-#         secondaryMover = request.form['secondaryMover']
-#         weights = request.form['weights']
-#
-#         cur = mysql.connection.cursor()
-#
-#         cur.execute("INSERT INTO Exercise(exName, primaryMover, secondaryMover, weights) VALUES(%s, %s, %s, %s)",
-#                     (exName, primaryMover, secondaryMover, weights))
-#
-#         mysql.connection.commit()
-#
-#         cur.close()
-#
-#     return displayExercises()
-
-
-#
-# Static page generation
-#
-
+# Routes
 @app.route('/')
-def home():
-    return render_template('index.html')
+def root():
+    """Serves the website home page"""
+    return render_template("index.html")
 
 
-@app.route('/index.html')
-def index():
-    return render_template('index.html')
+@app.route('/customers', methods=['GET', 'POST'])
+def customers():
+    """Serves the Customers page"""
+
+    # Handle GET requests by fetching all Customers data
+    if request.method == 'GET':
+        query = "SELECT * FROM `Customers`;"
+        customer_info = db.execute_query(db_connection, query).fetchall()
+
+        return render_template("customers.html", customer_info=customer_info)
+
+    # Handle POST requests by inserting form data from front end
+    if request.method == 'POST':
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        street_address = request.form['streetAddress']
+        city = request.form['city']
+        state = request.form['state']
+        zip_code = request.form['zipCode']
+        phone = request.form['phoneNumber']
+        email = request.form['email']
+
+        # Handle case when no phone number is given to ensure phoneNumber will be NULL in database
+        if phone == "":
+            query = "INSERT INTO `Customers` (`firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `email`) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+            data = (first_name, last_name, street_address, city, state, zip_code, email)
+        else:
+            query = "INSERT INTO `Customers` (`firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNumber`, `email`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+            data = (first_name, last_name, street_address, city, state, zip_code, phone, email)
+
+        # Execute query to insert data
+        db.execute_query(db_connection, query, data)
+
+        # Redirect to same webpage after form submission
+        return redirect(url_for('customers'))
 
 
-@app.route('/medications.html')
-def medications():
-    # return createClient()
-    return render_template('medications.html')
+@app.route('/vinyls', methods=['GET', 'POST'])
+def vinyls():
+    """Serves the Vinyls page"""
+
+    # Sample data to fill first two rows on table
+    # vinyl_info = [{"product_id": 3, "album": "Back in Black", "artist": "AC/DC", "genre": "hard rock", "price": 21.67, "quantity_available": 23},
+    #              {"product_id": 5, "album": "The Dark Side of the Moon", "artist": "Pink Floyd/DC", "genre": "rock", "price": 18.99, "quantity_available": 29}]
+
+    # Handle GET requests by fetching all Customers data
+    if request.method == 'GET':
+        query = "SELECT * FROM `Vinyls`;"
+        vinyl_info = db.execute_query(db_connection, query).fetchall()
+        return render_template("vinyls.html", vinyl_info=vinyl_info)
+
+    # Handle POST requests by inserting form data from front end
+    if request.method == 'POST':
+        album_name = request.form['albumName']
+        artist_name = request.form['artistName']
+        genre = request.form['genre']
+        price = request.form['price']
+        quantity_available = request.form['quantityAvailable']
+
+        query = "INSERT INTO `Vinyls` (`albumName`, `artistName`, `genre`, `price`, `quantityAvailable`) VALUES (%s, %s, %s, %s, %s);"
+        data = (album_name, artist_name, genre, price, quantity_available)
+
+        # Execute query to insert data
+        db.execute_query(db_connection, query, data)
+
+        # Redirect to same webpage after form submission
+        return redirect(url_for('vinyls'))
 
 
-@app.route('/prescriptions.html')
-def prescriptions():
-    # return createDietician()
-    return render_template('prescriptions.html')
+@app.route('/orders', methods=['GET', 'POST'])
+def orders():
+    """Serves the Orders page"""
+
+    # Handle GET requests by fetching all Orders data
+    if request.method == 'GET':
+        customer_filter = None  # customerID filter initialized to None
+
+        # default query: select the entire table
+        query_orders = "SELECT * FROM `Orders`;"
+
+        # if there is no request parameter, skip to show the entire table
+        if len(request.args) == 0:
+            pass
+
+        # Delete order by orderID
+        elif request.args.get('order_to_delete') != None:
+            order_to_delete = request.args['order_to_delete']
+            query_delete_order = "DELETE FROM `Orders` WHERE `orderID` = " + order_to_delete + ";"
+            db.execute_query(db_connection, query_delete_order)
+
+        # If 'Clear Filter' option is chosen, refresh page with no filters
+        elif request.args.get('customerID') == "":
+            return redirect(url_for('orders'))
+
+        # Otherwise select table with customerID filters applied
+        elif request.args.get('customerID') != None:
+            customer_filter = request.args['customerID']
+            query_orders = "SELECT * FROM `Orders` WHERE customerID = " + customer_filter + ";"
+
+        order_info = db.execute_query(db_connection, query_orders).fetchall()
+
+        # Fetch all customerID's for drop down menu
+        query_customers = "SELECT `customerID`, `firstName`, `lastName` FROM `Customers`;"
+        customer_names = db.execute_query(db_connection, query_customers)
+
+        # Fetch all couponID's for drop down menu
+        query_coupons = "SELECT `couponID` FROM `Coupons`;"
+        coupon_info = db.execute_query(db_connection, query_coupons)
+
+        # Fetch all orderID's for drop down menu
+        query_orderID = "SELECT `orderID` FROM `Orders`;"
+        orderID_info = db.execute_query(db_connection, query_orderID)
+        return render_template("orders.html", order_info=order_info, customer_names=customer_names,
+                               coupon_info=coupon_info, orderID_info=orderID_info, filter=customer_filter)
+
+    if request.method == 'POST':
+
+        # If add an order
+        if request.form.get('customerID') != None:
+            order_date = request.form['orderDate']
+            customer_id = request.form['customerID']
+            coupon_id = request.form['couponID']
+            order_status = request.form['orderStatus']
+
+            # Handle case when no couponID is given
+            if coupon_id == "":
+                query = "INSERT INTO `Orders` (`orderDate`,`customerID`, `couponID`, `orderStatus`) VALUES (%s, %s, NULL, %s);"
+                data = (order_date, customer_id, order_status)
+            else:
+                query = "INSERT INTO `Orders` (`orderDate`,`customerID`, `couponID`, `orderStatus`) VALUES (%s, %s, %s, %s);"
+                data = (order_date, customer_id, coupon_id, order_status)
+
+            # Execute query to insert data
+            db.execute_query(db_connection, query, data)
+
+        # If update an order
+        if request.form.get('order_to_update') != None:
+            order_to_update = request.form['order_to_update']
+            orderStatus_to_update = request.form['orderStatus_to_update']
+            coupon_to_update = request.form['coupon_to_update']
+
+            # Handle case when no couponID is given
+            if coupon_to_update == "":
+                query = "UPDATE `Orders` SET `orderStatus` = %s, `couponID` = NULL WHERE `orderID` = %s;"
+                data = (orderStatus_to_update, order_to_update)
+            else:
+                query = "UPDATE `Orders` SET `orderStatus` = %s, `couponID` = %s WHERE `orderID` = %s;"
+                data = (orderStatus_to_update, coupon_to_update, order_to_update)
+
+            # Execute query to update data
+            db.execute_query(db_connection, query, data)
+        # Redirect to same webpage after form submission
+        return redirect(url_for('orders'))
 
 
-@app.route('/orders.html')
-def purchase_orders():
-    # return createExercise()
-    return render_template('orders.html')
+@app.route('/coupons', methods=['GET', 'POST'])
+def coupons():
+    """Serves the Coupons Products page"""
+
+    # Sample data to fill first two rows on table
+    # coupon_info = [{"coupon_id": "FALL_2021", "discount": 0.25, "expire_date": "2021-11-23"},
+    #               {"coupon_id": "FOOTOWN_SPECIAL", "discount": 0.15, "expire_date": "2021-10-31"}]
+
+    # Handle GET requests by fetching all Customers data
+    if request.method == 'GET':
+        query = "SELECT * FROM `Coupons`;"
+        coupon_info = db.execute_query(db_connection, query).fetchall()
+        return render_template("coupons.html", coupon_info=coupon_info)
+
+    # Handle POST requests by inserting form data from front end
+    if request.method == 'POST':
+        couponID = request.form['couponID']
+        percentDiscount = request.form['percentDiscount']
+        expirationDate = request.form['expirationDate']
+
+        query = "INSERT INTO `Coupons` VALUES (%s, %s, %s);"
+        data = (couponID, percentDiscount, expirationDate)
+
+        # Execute query to insert data
+        db.execute_query(db_connection, query, data)
+
+        # Redirect to same webpage after form submission
+        return redirect(url_for('coupons'))
 
 
-@app.route('/suppliers.html')
-def suppliers():
-    # return createTrainer()
-    return render_template('suppliers.html')
+@app.route('/orderProducts', methods=['GET', 'POST'])
+def order_products():
+    """Serves the Order Products page"""
+
+    # Handle GET requests by fetching all Customers data
+    if request.method == 'GET':
+        query = "SELECT * FROM `OrderProducts`;"
+        orderProducts_info = db.execute_query(db_connection, query).fetchall()
+
+        # Fetch all orderID's for drop down menu
+        query_orders = "SELECT `orderID` FROM `Orders`;"
+        orders_info = db.execute_query(db_connection, query_orders)
+
+        # Fetch all productID's for drop down menu
+        query_products = "SELECT `productID` FROM `Vinyls`;"
+        products_info = db.execute_query(db_connection, query_products)
+        return render_template("order-products.html", \
+                               orderProducts_info=orderProducts_info, \
+                               orders_info=orders_info, \
+                               products_info=products_info)
+
+    # Handle POST requests by inserting form data from front end
+    if request.method == 'POST':
+        orderID = request.form['orderID']
+        productID = request.form['productID']
+        quantity = request.form['quantity']
+
+        query = "INSERT INTO `OrderProducts` VALUES (%s, %s, %s);"
+        data = (orderID, productID, quantity)
+
+        # Execute query to insert data
+        db.execute_query(db_connection, query, data)
+
+        # Redirect to same webpage after form submission
+        return redirect(url_for('order_products'))
+
+    # TODO DELETE OrderProducts
 
 
-@app.route('/patients.html')
-def patients():
-    return render_template('patients.html')
-
-
-@app.route('/techs.html')
-def pharmacy_technicians():
-    return render_template('techs.html')
-
-
+# Listener
 if __name__ == "__main__":
-    app.run(host=hostingURL, port=Port, debug=True)
+    port = int(os.environ.get('PORT', 8796))
+    #                                 ^^^^
+    #              You can replace this number with any valid port
+
+    app.run(port=port, debug=True)
+
