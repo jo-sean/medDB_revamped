@@ -7,7 +7,6 @@
 </head>
 
 <body>
-
     <div id="website-header">
         <h1>MedCount DB</h1>
         <nav>
@@ -22,12 +21,11 @@
         </nav>
     </div>
 
-    <form>
         <div>
-            <!-- <h2 id="website-subtitle">Beaver Drugs</h2> -->
             <h2 class="page-title">Suppliers</h2>
         </div>
-        <div>
+
+        <section>
             <table id="suppliers">
                 <caption>
                     Suppliers
@@ -44,7 +42,6 @@
                 </thead>
                 <tbody>
                     {% for supply in supplier_info  %}
-                    <!-- {/* Fake data for display */} -->
                     <tr>
                         <td>{{supply['supplier_id']}}</td>
                         <td>{{supply['name']}}</td>
@@ -54,43 +51,28 @@
                         <td><button type="button">Delete</button></td>
                     </tr>
                     {% endfor %}
-                    <!-- {suppliers.map((supplier, i) => (
-                    <Supplier
-                      supplier={supplier}
-                      onDelete={onDelete}
-                      onEdit={onEdit}
-                      key={i}
-                    />
-                  ))} -->
                 </tbody>
+                <tfoot>
+                </tfoot>
             </table>
+        </section>
 
 
-        </div>
-        <div class="button-container">
+        <section>
             <div>
                 <h2 class="page-title">Add Supplier</h2>
             </div>
-            <form action="/prescriptions" method="post">
+            <form action="/suppliers" method="post">
+                <fieldset>
                 <input class="input-attribute" type="text" placeholder="Enter supplier name" value="name" />
-                <!-- onChange={(e) => setName(e.target.value)}
-                /> -->
                 <input class="input-attribute" type="number" value="zip_code" placeholder="5 digit zip" />
-                <!-- onChange={(e) => setZip(e.target.value)} -->
-
                 <input class="input-attribute" type="number" maxlength="10" placeholder="Phone-no dashes"
                     value="phone" />
-                <!-- onChange={(e) => setPhone(e.target.value)} -->
-                <!-- /> -->
-
             <div class="button-container">
-                <input type="submit" id="add_patients" value="Add Patient">
+                <input type="submit" id="add_supplier" value="Add Supplier">
             </div>
             </fieldset>
-        </form>
-
-
-    </div>
+            </form>
+        </section>
 </body>
-
 </html>
