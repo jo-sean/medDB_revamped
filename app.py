@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, json
 from flask_mysqldb import MySQL
 import dbconfig
 
@@ -19,7 +19,7 @@ app = Flask(__name__,
 
 app.config['MYSQL_HOST'] = dbconfig.host
 app.config['MYSQL_USER'] = dbconfig.user
-app.config['MYSQL_PASSWORD'] = dbconfig.password
+app.config['MYSQL_PASSWORD'] = dbconfig.passwd
 app.config['MYSQL_DB'] = dbconfig.db
 
 mysql = MySQL(app)
@@ -302,10 +302,9 @@ mysql = MySQL(app)
 #     return displayExercises()
 
 
-"""
-Static page generation - shouldn't need to be changed
-"""
-
+#
+# Static page generation
+#
 
 @app.route('/')
 def home():

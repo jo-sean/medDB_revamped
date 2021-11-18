@@ -3,7 +3,7 @@
 
 <head>
   <title> MedDB - Home </title>
-  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
 <body>
@@ -12,7 +12,6 @@
     <h1>MedCount DB</h1>
 
     <nav>
-      <!-- <a href="https://www.w3schools.com">Visit W3Schools</a> -->
       <a class="nav-link" href="index.html">Home Page</a>|
       <a class="nav-link" href="medications.html">Medication Inventory</a> |
       <a class="nav-link" href="prescriptions.html">Prescriptions</a> |
