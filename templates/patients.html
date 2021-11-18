@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patients</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
 <body>
@@ -44,33 +44,24 @@
                     <th>street_number</th>
                     <th>street_name</th>
                     <th>zip_code</th>
-                    <th></th>
-                    <th></th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>0101</td>
-                    <td>Jonathan</td>
-                    <td>Smith</td>
-                    <td>123-456-7890</td>
-                    <td>123</td>
-                    <td>Baker St</td>
-                    <td>97003</td>
-                    <td><button type="button">Edit</button></td>
-                    <td><button type="button">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>0102</td>
-                    <td>Jane</td>
-                    <td>Smith</td>
-                    <td>123-456-7890</td>
-                    <td>123</td>
-                    <td>Baker St</td>
-                    <td>97003</td>
-                    <td><button type="button">Edit</button></td>
-                    <td><button type="button">Delete</button></td>
-                </tr>
+                    {% for row in pt_info %}
+                    <tr>
+                        <td>{{row['patient_id']}}</td>
+                        <td>{{row['first_name']}}</td>
+                        <td>{{row['last_name']}}</td>
+                        <td>{{row['phone']}}</td>
+                        <td>{{row['street_number']}}</td>
+                        <td>{{row['street_name']}}</td>
+                        <td>{{row['zip_code']}}</td>
+                        <td><button type="button">Edit</button></td>
+                        <td><button type="button">Delete</button></td>
+                    </tr>
+                    {% endfor %}
             </tbody>
             <tfoot>
             </tfoot>
@@ -81,15 +72,15 @@
         <div>
             <h2 class="page-title">Add Patient</h2>
         </div>
-        <form action="/addpatient" method="POST">
-            <input class="input-attribute" type="text" placeholder="first_name" />
-            <input class="input-attribute" type="text" placeholder="last_name" />
-            <input class="input-attribute" type="number" maxlength="10" placeholder="phone" />
-            <input class="input-attribute" type="number" placeholder="street_number" />
-            <input class="input-attribute" type="text" placeholder="street_name" />
-            <input class="input-attribute" type="number" maxlength="5" placeholder="zip_code" />
+        <form action="/patients" method="post">
+            <input class="input-attribute" type="text" placeholder="first_name" name="first_name"/>
+            <input class="input-attribute" type="text" placeholder="last_name" name="first_name"/>
+            <input class="input-attribute" type="number" maxlength="10" placeholder="phone" name="first_name" />
+            <input class="input-attribute" type="number" placeholder="street_number" name="first_name" />
+            <input class="input-attribute" type="text" placeholder="street_name" name="first_name" />
+            <input class="input-attribute" type="number" maxlength="5" placeholder="zip_code" name="first_name" />
             <div class="button-container">
-                <button id="submit-button">Add</button>
+                <input type="submit" id="add_patients" value="Add Patient">
             </div>
         </form>
     </section>
