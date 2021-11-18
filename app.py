@@ -10,45 +10,40 @@ app = Flask(__name__)
 # Connect to database when server is started
 db_connection = db.connect_to_database()
 
-
 # Routes
 @app.route('/')
 def root():
-    """Serves the website home page"""
+    """
+    Serves: home page
+    """
     return render_template("index.html")
 
 
-@app.route('/customers', methods=['GET', 'POST'])
-def customers():
-    """Serves the Customers page"""
+@app.route('/medications', methods=['GET', 'POST'])
+def medications():
+    """
+    Serves: medications page
+    """
 
-    # Handle GET requests by fetching all Customers data
+    # GET requests -> fetching all medications data
     if request.method == 'GET':
-        query = "SELECT * FROM `Customers`;"
-        customer_info = db.execute_query(db_connection, query).fetchall()
+        query = 'SELECT * FROM `medications` ORDER BY drug_name;'
+        med_info = db.execute_query(db_connection, query).fetchall()
+        return render_template('medications.html', med_info=med_info)
 
-        return render_template("customers.html", customer_info=customer_info)
-
-    # Handle POST requests by inserting form data from front end
+    # POST requests -> insert form data
     if request.method == 'POST':
-        first_name = request.form['firstName']
-        last_name = request.form['lastName']
-        street_address = request.form['streetAddress']
-        city = request.form['city']
-        state = request.form['state']
-        zip_code = request.form['zipCode']
-        phone = request.form['phoneNumber']
-        email = request.form['email']
+        drug_name = request.form['drug_name']
+        dosage_form = request.form['dosage_form']
+        dose_number = request.form['dose_number']
+        dose_unit = request.form['dose_unit']
+        quantity = request.form['quantity']
 
-        # Handle case when no phone number is given to ensure phoneNumber will be NULL in database
-        if phone == "":
-            query = "INSERT INTO `Customers` (`firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `email`) VALUES (%s, %s, %s, %s, %s, %s, %s);"
-            data = (first_name, last_name, street_address, city, state, zip_code, email)
-        else:
-            query = "INSERT INTO `Customers` (`firstName`, `lastName`, `streetAddress`, `city`, `state`, `zipCode`, `phoneNumber`, `email`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
-            data = (first_name, last_name, street_address, city, state, zip_code, phone, email)
+        # Define query and data
+        query = 'INSERT INTO `medications` (`medication_id`, `drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);'
+        data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
 
-        # Execute query to insert data
+        # Insert
         db.execute_query(db_connection, query, data)
 
         # Redirect to same webpage after form submission
