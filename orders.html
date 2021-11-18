@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Orders</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+
+<body>
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <div>
+            <nav>
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="medications.html">Medications</a>
+                <a class="nav-link" href="prescriptions.html">Prescriptions</a>
+                <a class="nav-link" href="orders.html">Purchase Orders</a>
+                <a class="nav-link" href="suppliers.html">Suppliers</a>
+                <a class="nav-link" href="patients.html">Patients</a>
+                <a class="nav-link" href="techs.html">Pharmacy Technicians</a>
+            </nav>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="page-title">Purchase Orders</h2>
+    </div>
+
+    <section>
+        <table id="orders">
+            <caption>
+                purchase_orders
+            </caption>
+            <thead>
+                <tr>
+                    <th>purchase_id</th>
+                    <th>supplier_id</th>
+                    <th>employee_id</th>
+                    <th>medication_id</th>
+                    <th>quantity</th>
+                    <th>unit_price</th>
+                    <th>total_price</th>
+                    <th>date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1001</td>
+                    <td>001</td>
+                    <td>1234</td>
+                    <td>0001</td>
+                    <td>270</td>
+                    <td>$0.10</td>
+                    <td>$27.00</td>
+                    <td>2021-09-31</td>
+                    <td><button type="button">Edit</button></td>
+                    <td><button type="button">Delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </section>
+
+    <section>
+        <div>
+            <h2 class="page-title">Add Purchase Order</h2>
+        </div>
+        <form action="/addorder" method="POST">
+            <input class="input-attribute" type="text" placeholder="supplier_id" />
+            <input class="input-attribute" type="text" placeholder="employee_id" />
+            <input class="input-attribute" type="text" placeholder="medication_id" />
+            <input class="input-attribute" type="number" placeholder="quantity" />
+            <input class="input-attribute" type="number" placeholder="unit_price" />
+            <input class="input-attribute" type="text" maxlength="8" placeholder="date" />
+            <div class="button-container">
+                <button id="submit-button">Add</button>
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>

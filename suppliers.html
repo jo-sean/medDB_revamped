@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Suppliers </title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <nav>
+            <!-- <a href="https://www.w3schools.com">Visit W3Schools</a> -->
+            <a class="nav-link" href="index.html">Home Page</a> |
+            <a class="nav-link" href="medications.html">Medication Inventory</a> |
+            <a class="nav-link" href="prescriptions.html">Prescriptions</a> |
+            <a class="nav-link" href="orders.html">Purchase Orders</a> |
+            <a class="nav-link" href="suppliers.html">Suppliers</a> |
+            <a class="nav-link" href="patients.html">Patients</a> |
+            <a class="nav-link" href="techs.html">Pharmacy Technicians</a>
+        </nav>
+    </div>
+
+    <div>
+        <div>
+            <!-- <h2 id="website-subtitle">Beaver Drugs</h2> -->
+            <h2 class="page-title">Suppliers</h2>
+        </div>
+        <div>
+            <table id="suppliers">
+                <caption>
+                    Suppliers
+                </caption>
+                <thead>
+                    <tr>
+                        <th>supplier_id</th>
+                        <th>name</th>
+                        <th>zip_code</th>
+                        <th>phone</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- {/* Fake data for display */} -->
+                    <tr>
+                        <td>001</td>
+                        <td>McKesson</td>
+                        <td>75000</td>
+                        <td>800-793-9875</td>
+                        <td><button type="button">Edit</button></td>
+                        <td><button type="button">Delete</button></td>
+                    </tr>
+
+                    <!-- {suppliers.map((supplier, i) => (
+                    <Supplier
+                      supplier={supplier}
+                      onDelete={onDelete}
+                      onEdit={onEdit}
+                      key={i}
+                    />
+                  ))} -->
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="button-container">
+            <div>
+                <h2 class="page-title">Add Supplier</h2>
+            </div>
+            <div>
+                <input class="input-attribute" type="text" placeholder="Enter supplier name" value="name" />
+                <!-- onChange={(e) => setName(e.target.value)}
+                /> -->
+                <input class="input-attribute" type="number" value="zip_code" placeholder="5 digit zip" />
+                <!-- onChange={(e) => setZip(e.target.value)} -->
+
+                <input class="input-attribute" type="number" maxlength="10" placeholder="Phone-no dashes"
+                    value="phone" />
+                <!-- onChange={(e) => setPhone(e.target.value)} -->
+                <!-- /> -->
+            </div>
+            <div class="button-container">
+                <button id="submit-button" onClick={addSupplier}>
+                    Add
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

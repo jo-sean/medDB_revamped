@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <div>
+            <nav>
+                <a class="nav-link" href="index.html">Home</a> |
+                <a class="nav-link" href="medications.html">Medications</a> |
+                <a class="nav-link" href="prescriptions.html">Prescriptions</a> |
+                <a class="nav-link" href="orders.html">Purchase Orders</a> |
+                <a class="nav-link" href="suppliers.html">Suppliers</a> |
+                <a class="nav-link" href="patients.html">Patients</a> |
+                <a class="nav-link" href="techs.html">Pharmacy Technicians</a>
+            </nav>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="page-title">Patients</h2>
+    </div>
+
+    <section>
+        <table id="patients">
+            <caption>
+                Patients
+            </caption>
+            <thead>
+                <tr>
+                    <th>patient_id</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>phone</th>
+                    <th>street_number</th>
+                    <th>street_name</th>
+                    <th>zip_code</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0101</td>
+                    <td>Jonathan</td>
+                    <td>Smith</td>
+                    <td>123-456-7890</td>
+                    <td>123</td>
+                    <td>Baker St</td>
+                    <td>97003</td>
+                    <td><button type="button">Edit</button></td>
+                    <td><button type="button">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>0102</td>
+                    <td>Jane</td>
+                    <td>Smith</td>
+                    <td>123-456-7890</td>
+                    <td>123</td>
+                    <td>Baker St</td>
+                    <td>97003</td>
+                    <td><button type="button">Edit</button></td>
+                    <td><button type="button">Delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </section>
+
+    <section>
+        <div>
+            <h2 class="page-title">Add Patient</h2>
+        </div>
+        <form action="/addpatient" method="POST">
+            <input class="input-attribute" type="text" placeholder="first_name" />
+            <input class="input-attribute" type="text" placeholder="last_name" />
+            <input class="input-attribute" type="number" maxlength="10" placeholder="phone" />
+            <input class="input-attribute" type="number" placeholder="street_number" />
+            <input class="input-attribute" type="text" placeholder="street_name" />
+            <input class="input-attribute" type="number" maxlength="5" placeholder="zip_code" />
+            <div class="button-container">
+                <button id="submit-button">Add</button>
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>

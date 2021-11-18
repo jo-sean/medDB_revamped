@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Technicians</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+
+<body>
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <div>
+            <nav>
+                <a class="nav-link" href="index.html">Home</a> |
+                <a class="nav-link" href="medications.html">Medications</a> |
+                <a class="nav-link" href="prescriptions.html">Prescriptions</a> |
+                <a class="nav-link" href="orders.html">Purchase Orders</a> |
+                <a class="nav-link" href="suppliers.html">Suppliers</a> |
+                <a class="nav-link" href="patients.html">Patients</a> |
+                <a class="nav-link" href="techs.html">Pharmacy Technicians</a>
+            </nav>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="page-title">Pharmacy Technicians</h2>
+    </div>
+
+    <section>
+        <table id="techs">
+            <caption>
+                Techs
+            </caption>
+            <thead>
+                <tr>
+                    <th>employee_id</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>99</td>
+                    <td>Wayne</td>
+                    <td>Gretzky</td>
+                    <td><button type="button">Edit</button></td>
+                    <td><button type="button">Delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </section>
+
+    <section>
+        <div>
+            <h2 class="page-title">Add Pharmacy Technician</h2>
+        </div>
+        <form action="/addtech" method="POST">
+            <input class="input-attribute" type="text" placeholder="first_name" />
+            <input class="input-attribute" type="text" placeholder="last_name" />
+            <div class="button-container">
+                <button id="submit-button">Add</button>
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>
