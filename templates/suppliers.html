@@ -3,7 +3,7 @@
 
 <head>
     <title> MedDB - Suppliers </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
             <h2 class="page-title">Suppliers</h2>
         </div>
 
-        <section>
+        <div>
             <table id="suppliers">
                 <caption>
                     Suppliers
@@ -50,14 +50,13 @@
                         <td><button type="button">Delete</button></td>
                     </tr>
                     {% endfor %}
+
                 </tbody>
-                <tfoot>
-                </tfoot>
             </table>
-        </section>
+        </div>
 
 
-        <section>
+        <div>
             <div>
                 <h2 class="page-title">Add Supplier</h2>
             </div>
@@ -71,6 +70,6 @@
             </div>
             </fieldset>
             </form>
-        </section>
+        </div>
 </body>
 </html>

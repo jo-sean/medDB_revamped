@@ -3,7 +3,7 @@
 
 <head>
     <title> MedDB - Prescriptions </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         <div>
             <h2 class="page-title"></h2>
         </div>
-     <section>
+     <div>
          <table id="prescriptions">
             <caption>
                 Prescriptions
@@ -52,12 +52,10 @@
                     </tr>
                    {% endfor %}
                 </tbody>
-             <tfoot>
-            </tfoot>
             </table>
-    </section>
+    </div>
 
-    <section>
+    <div>
             <div>
                 <h2 class="page-title">Add Prescription</h2>
             </div>
@@ -71,6 +69,6 @@
             </div>
             </fieldset>
             </form>
-    </section>
+    </div>
 </body>
 </html>

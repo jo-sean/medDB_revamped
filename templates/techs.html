@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharmacy Technicians</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>MedDB - Pharm Techs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
 <body>
+
     <div id="website-header">
         <h1>MedCount DB</h1>
     <nav>
@@ -27,7 +25,7 @@
         <h2 class="page-title">Pharmacy Technicians</h2>
     </div>
 
-    <section>
+    <div>
         <table id="techs">
             <caption>
                 Techs
@@ -45,8 +43,8 @@
             {% for tech in tech_info %}
                 <tr>
                     <td>{{tech['employee_id']}}</td>
-                    <td>{{tech['first_name'}}</td>
-                    <td>{{tech['last_name'}}</td>
+                    <td>{{tech['first_name']}}</td>
+                    <td>{{tech['last_name']}}</td>
                     <td><button type="button">Edit</button></td>
                     <td><button type="button">Delete</button></td>
                 </tr>
@@ -55,9 +53,9 @@
             <tfoot>
             </tfoot>
         </table>
-    </section>
+    </div>
 
-    <section>
+    <div>
         <div>
             <h2 class="page-title">Add Pharmacy Technician</h2>
         </div>
@@ -70,7 +68,7 @@
             </div>
             </fieldset>
             </form>
-    </section>
+    </div>
 
 </body>
 </html>
