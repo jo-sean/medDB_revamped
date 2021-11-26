@@ -57,7 +57,11 @@
                     <td>{{row['street_name']}}</td>
                     <td>{{row['zip_code']}}</td>
                     <td><button type="button">Edit</button></td>
-                    <td><button type="button">Delete</button></td>
+                    <td>
+                        <form action="/patients" method="POST">
+                            <button type="submit" name="delete" value="{{ row['patient_id'] }}">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

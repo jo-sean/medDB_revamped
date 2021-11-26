@@ -48,7 +48,11 @@
                         <td>{{pres['medication_id']}}</td>
                         <td>{{pres['quantity']}}</td>
                         <td><button type="button">Edit</button></td>
-                        <td><button type="button">Delete</button></td>
+                        <td>
+                            <form action="/prescriptions" method="POST">
+                                <button type="submit" name="delete" value="{{ pres['prescription_id'] }}">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                    {% endfor %}
                 </tbody>

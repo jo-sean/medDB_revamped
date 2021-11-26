@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 # Connect to database when server is started
 db_connection = db.connect_to_database()
+db_connection(True)
 
 
 # ************************* ROUTING *************************

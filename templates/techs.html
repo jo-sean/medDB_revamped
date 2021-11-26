@@ -46,7 +46,11 @@
                     <td>{{tech['first_name']}}</td>
                     <td>{{tech['last_name']}}</td>
                     <td><button type="button">Edit</button></td>
-                    <td><button type="button">Delete</button></td>
+                    <td>
+                        <form action="/techs" method="POST">
+                            <button type="submit" name="delete" value="{{ tech['employee_id'] }}">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
