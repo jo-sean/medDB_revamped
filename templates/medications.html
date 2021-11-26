@@ -64,10 +64,13 @@
                         <td>{{row['dose_unit']}}</td>
                         <td>{{row['quantity']}}</td>
                         <td><button type="button">Edit</button></td>
-                        <td><button type="button">Delete</button></td>
+                        <td>
+                            <form action="/medications" method="POST">
+                                <button type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
-
                 </tbody>
             </table>
 

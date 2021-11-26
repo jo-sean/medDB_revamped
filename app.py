@@ -11,6 +11,7 @@ app = Flask(__name__)
 # Connect to database when server is started
 db_connection = db.connect_to_database()
 
+
 # ************************* ROUTING *************************
 @app.route('/')
 def root():
@@ -32,24 +33,40 @@ def medications():
         med_info = db.execute_query(db_connection, query).fetchall()
         return render_template('medications.html', med_info=med_info)
 
-    # POST requests -> insert form data
+    # POST requests
     if request.method == 'POST':
-        drug_name = request.form['drug_name']
-        dosage_form = request.form['dosage_form']
-        dose_number = request.form['dose_number']
-        dose_unit = request.form['dose_unit']
-        quantity = request.form['quantity']
+        # delete
+        if 'delete' in request.form.keys():
+            medication_id = request.form['delete']
+            query = "DELETE FROM medications WHERE medication_id = '%s';" % medication_id
+            db.execute_query(db_connection=db_connection, query=query)
+        # insert
+        else:
+            drug_name = request.form['drug_name']
+            dosage_form = request.form['dosage_form']
+            dose_number = request.form['dose_number']
+            dose_unit = request.form['dose_unit']
+            quantity = request.form['quantity']
 
-        # Define query and data
-        query = "INSERT INTO `medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
-        data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
+            # Define query and data
+            query = "INSERT INTO `medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
+            data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
 
-        # Insert
-        db.execute_query(db_connection, query, data)
+            # Insert
+            db.execute_query(db_connection, query, data)
 
         # After form submission -> reload same page
         return redirect(url_for('medications'))
 
+    # # PUT request -> update tuple
+    # if request.method == 'PUT':
+    #
+    # # DELETE request -> delete tuple
+    # if request.method == 'DELETE':
+    #     medication_id = request.form.delete()
+    #     query = "DELETE FROM medications WHERE medication_id = '%s';" (medication_id)
+    #     cursor = db.execute_query(db_connection=db_connection, query=query)
+    #     return redirect('/medications')
 
 @app.route('/suppliers', methods=['GET', 'POST'])
 def suppliers():
@@ -65,16 +82,23 @@ def suppliers():
 
     # POST requests -> insert form data
     if request.method == 'POST':
-        name = request.form['name']
-        zip_code = request.form['zip_code']
-        phone = request.form['phone']
+        # delete
+        if 'delete' in request.form.keys():
+            supplier_id = request.form['delete']
+            query = "DELETE FROM suppliers WHERE supplier_id = '%s';" % supplier_id
+            db.execute_query(db_connection=db_connection, query=query)
+        # insert
+        else:
+            name = request.form['name']
+            zip_code = request.form['zip_code']
+            phone = request.form['phone']
 
-        # Define query and data
-        query = "INSERT INTO `suppliers` (`name`, `zip_code`, `phone`) VALUES (%s, %s, %s);"
-        data = (name, zip_code, phone)
+            # Define query and data
+            query = "INSERT INTO `suppliers` (`name`, `zip_code`, `phone`) VALUES (%s, %s, %s);"
+            data = (name, zip_code, phone)
 
-        # Insert
-        db.execute_query(db_connection, query, data)
+            # Insert
+            db.execute_query(db_connection, query, data)
 
         # After form submission -> reload same page
         return redirect(url_for('suppliers'))
@@ -94,19 +118,26 @@ def patients():
 
     # POST requests -> insert form data
     if request.method == 'POST':
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        phone = request.form['phone']
-        street_number = request.form['street_number']
-        street_name = request.form['street_name']
-        zip_code = request.form['zip_code']
+        # delete
+        if 'delete' in request.form.keys():
+            patient_id = request.form['delete']
+            query = "DELETE FROM patients WHERE patient_id = '%s';" % patient_id
+            db.execute_query(db_connection=db_connection, query=query)
+        # insert
+        else:
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            phone = request.form['phone']
+            street_number = request.form['street_number']
+            street_name = request.form['street_name']
+            zip_code = request.form['zip_code']
 
-        # Define query and data
-        query = "INSERT INTO `patients`(`first_name`, `last_name`, `phone`, `street_number`, `street_name`, `zip_code`) VALUES (%s, %s, %s, %s, %s, %s);"
-        data = (first_name, last_name, phone, street_number, street_name, zip_code)
+            # Define query and data
+            query = "INSERT INTO `patients`(`first_name`, `last_name`, `phone`, `street_number`, `street_name`, `zip_code`) VALUES (%s, %s, %s, %s, %s, %s);"
+            data = (first_name, last_name, phone, street_number, street_name, zip_code)
 
-        # Insert
-        db.execute_query(db_connection, query, data)
+            # Insert
+            db.execute_query(db_connection, query, data)
 
         # After form submission -> reload same page
         return redirect(url_for('patients'))
@@ -126,13 +157,20 @@ def techs():
 
     # POST requests -> insert form data
     if request.method == 'POST':
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        query = "INSERT INTO `pharmacy_technicians` (`first_name`,`last_name`) VALUES (%s, %s);"
-        data = (first_name, last_name)
+        # delete
+        if 'delete' in request.form.keys():
+            employee_id = request.form['delete']
+            query = "DELETE FROM pharmacy_technicians WHERE employee_id = '%s';" % employee_id
+            db.execute_query(db_connection=db_connection, query=query)
+        # insert
+        else:
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            query = "INSERT INTO `pharmacy_technicians` (`first_name`,`last_name`) VALUES (%s, %s);"
+            data = (first_name, last_name)
 
-        # Execute query to insert data
-        db.execute_query(db_connection, query, data)
+            # Execute query to insert data
+            db.execute_query(db_connection, query, data)
 
         # Redirect to same webpage after form submission
         return redirect(url_for('techs'))
@@ -152,14 +190,21 @@ def prescriptions():
 
     # POST requests -> insert form data
     if request.method == 'POST':
-        patient_id = request.form['patient_id']
-        medication_id = request.form['medication_id']
-        quantity = request.form['quantity']
-        query = "INSERT INTO `prescriptions` (`patient_id`,`medication_id`, `quantity`) VALUES (%s, %s, %s);"
-        data = (patient_id, medication_id, quantity)
+        # delete
+        if 'delete' in request.form.keys():
+            prescription_id = request.form['delete']
+            query = "DELETE FROM prescriptions WHERE prescription_id = '%s';" % prescription_id
+            db.execute_query(db_connection=db_connection, query=query)
+        # insert
+        else:
+            patient_id = request.form['patient_id']
+            medication_id = request.form['medication_id']
+            quantity = request.form['quantity']
+            query = "INSERT INTO `prescriptions` (`patient_id`,`medication_id`, `quantity`) VALUES (%s, %s, %s);"
+            data = (patient_id, medication_id, quantity)
 
-        # Execute query to insert data
-        db.execute_query(db_connection, query, data)
+            # Execute query to insert data
+            db.execute_query(db_connection, query, data)
 
         # Redirect to same webpage after form submission
         return redirect(url_for('prescriptions'))
@@ -179,20 +224,27 @@ def orders():
 
     # POST requests -> insert form data
     if request.method == 'POST':
-        supplier_id = request.form['supplier_id']
-        employee_id = request.form['employee_id']
-        medication_id = request.form['medication_id']
-        quantity = request.form['quantity']
-        unit_price = request.form['unit_price']
-        total_price = request.form['total_price']
-        date = request.form['date']
+        # delete
+        if 'delete' in request.form.keys():
+            purchase_id = request.form['delete']
+            query = "DELETE FROM purchase_orders WHERE purchase_id = '%s';" % purchase_id
+            db.execute_query(db_connection=db_connection, query=query)
+        # insert
+        else:
+            supplier_id = request.form['supplier_id']
+            employee_id = request.form['employee_id']
+            medication_id = request.form['medication_id']
+            quantity = request.form['quantity']
+            unit_price = request.form['unit_price']
+            total_price = request.form['total_price']
+            date = request.form['date']
 
-        # Define query and data
-        query = "INSERT INTO `purchase_orders` (`supplier_id`, `employee_id`, `medication_id`, `quantity`, `unit_price`, `total_price`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s);"
-        data = (supplier_id, employee_id, medication_id, quantity, unit_price, total_price, date)
+            # Define query and data
+            query = "INSERT INTO `purchase_orders` (`supplier_id`, `employee_id`, `medication_id`, `quantity`, `unit_price`, `total_price`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+            data = (supplier_id, employee_id, medication_id, quantity, unit_price, total_price, date)
 
-        # Insert
-        db.execute_query(db_connection, query, data)
+            # Insert
+            db.execute_query(db_connection, query, data)
 
         # After form submission -> reload same page
         return redirect(url_for('orders'))
@@ -202,4 +254,3 @@ def orders():
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 7888))
     app.run(port=port, debug=True)
-
