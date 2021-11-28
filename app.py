@@ -69,6 +69,7 @@ def medications():
     #     cursor = db.execute_query(db_connection=db_connection, query=query)
     #     return redirect('/medications')
 
+
 @app.route('/suppliers', methods=['GET', 'POST'])
 def suppliers():
     """
@@ -250,6 +251,35 @@ def orders():
         # After form submission -> reload same page
         return redirect(url_for('orders'))
 
+
+# UPDATE
+@app.route('/update-medication', methods=['GET', 'POST'])
+def update_medication():
+    # Bring up new page with data auto-populated
+    if request.method == 'GET':
+        medication_id = request.args.get("medication_id")
+
+        query = "SELECT * FROM `medications` WHERE `medication_id` = '%s';" % medication_id
+        cursor = db.execute_query(db_connection, query)
+        med = cursor.fetchone()  # fetchone vs fetchall?
+        return render_template('update-medication.html', med=med)
+    # Submit updates
+    if request.method == 'POST':
+        medication_id = request.form['medication_id']
+        drug_name = request.form['drug_name']
+        dosage_form = request.form['dosage_form']
+        dose_number = request.form['dose_number']
+        dose_unit = request.form['dose_unit']
+        quantity = request.form['quantity']
+
+        query1 = "UPDATE medications SET drug_name = '%s', dosage_form = '%s', dose_number = '%s', dose_unit = '%s', quantity = '%s' WHERE medication_id = '%s';" % (
+        drug_name, dosage_form, dose_number, dose_unit, quantity, medication_id)
+        db.execute_query(db_connection, query1)
+
+        # Fetch all
+        query2 = "SELECT * FROM medications;"
+        med_info = db.execute_query(db_connection, query2).fetchall()
+        return render_template('medications.html', med_info=med_info)
 
 # ************************* LISTENER *************************
 if __name__ == "__main__":

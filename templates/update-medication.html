@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Medications </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <nav>
+          <a class="nav-link" href="/">Home Page</a>|
+          <a class="nav-link" href="/medications">Medication Inventory</a> |
+          <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+          <a class="nav-link" href="/orders">Purchase Orders</a> |
+          <a class="nav-link" href="/suppliers">Suppliers</a> |
+          <a class="nav-link" href="/patients">Patients</a> |
+          <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+        </nav>
+    </div>
+
+    <div>
+        <h2 class="page-title">Update Selected Medication</h2>
+    </div>
+    <div>
+    <form action="/update-medication" method="POST">
+        <input type="hidden" name="medication_id" value="{{med['medication_id']}}">
+        Drug Name:  <input class="input-attribute" type="text" name="drug_name" value="{{med['drug_name']}}"><br>
+        Dosage Form: <input class="input-attribute" type="text" name="dosage_form" value="{{med['dosage_form']}}"><br>
+        Dose: <input class="input-attribute" type="number" name="dose_number" value="{{med['dose_number']}}"><br>
+        Dose unit: <input class="input-attribute" type="text" name="dose_unit" value="{{med['dose_unit']}}"><br>
+        Quantity: <input class="input-attribute" type="number" name="quantity" value="{{med['quantity']}}"><br>
+         <!-- <button name="update_medication" value="{{ med['medication_id'] }}" type="submit">Submit</button> -->
+       <input type="submit" value="Submit"><br>
+        <a href="/medications" role="button">Cancel</a>
+    </form>
+    </div>
+
+</body>
+
+</html>

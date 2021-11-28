@@ -63,7 +63,11 @@
                         <td>{{row['dose_number']}}</td>
                         <td>{{row['dose_unit']}}</td>
                         <td>{{row['quantity']}}</td>
-                        <td><button type="button">Edit</button></td>
+                        <td>
+                            <form action="/update-medication" method="GET">
+                                <button type="submit" name="medication_id" value="{{ row['medication_id'] }}">Edit</button>
+                            </form>
+                        </td>
                         <td>
                             <form action="/medications" method="POST">
                                 <button type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
