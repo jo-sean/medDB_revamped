@@ -310,6 +310,32 @@ def update_tech():
         return render_template('techs.html', tech_info=tech_info)
 
 
+@app.route('/update-supplier', methods=['GET', 'POST'])
+def update_supplier():
+    # Bring up new page with data auto-populated
+    if request.method == 'GET':
+        supplier_id = request.args.get("supplier_id")
+
+        query = "SELECT * FROM `suppliers` WHERE `supplier_id` = '%s';" % supplier_id
+        cursor = db.execute_query(db_connection, query)
+        supply = cursor.fetchone()
+        return render_template('update-supplier.html', supply=supply)
+    # Submit updates
+    if request.method == 'POST':
+        supplier_id = request.form['supplier_id']
+        name = request.form['name']
+        zip_code = request.form['zip_code']
+        phone = request.form['phone']
+
+        query1 = "UPDATE suppliers SET name = '%s', zip_code = '%s', phone = '%s' WHERE supplier_id = '%s';" % (
+            name, zip_code, phone, supplier_id)
+        db.execute_query(db_connection, query1)
+
+        # Fetch all
+        query2 = "SELECT * FROM suppliers;"
+        supplier_info = db.execute_query(db_connection, query2).fetchall()
+        return render_template('suppliers.html', supplier_info=supplier_info)
+
 # ************************* LISTENER *************************
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 7888))

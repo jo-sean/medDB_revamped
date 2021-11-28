@@ -22,19 +22,17 @@
     </div>
 
     <div>
-        <h2 class="page-title">Update Selected Medication</h2>
+        <h2 class="page-title">Update Supplier</h2>
     </div>
     <div>
-    <form action="/update-medication" method="POST">
-        <input type="hidden" name="medication_id" value="{{med['medication_id']}}">
-        Drug Name:  <input class="input-attribute" type="text" name="drug_name" value="{{med['drug_name']}}"><br>
-        Dosage Form: <input class="input-attribute" type="text" name="dosage_form" value="{{med['dosage_form']}}"><br>
-        Dose: <input class="input-attribute" type="number" name="dose_number" value="{{med['dose_number']}}"><br>
-        Dose unit: <input class="input-attribute" type="text" name="dose_unit" value="{{med['dose_unit']}}"><br>
-        Quantity: <input class="input-attribute" type="number" name="quantity" value="{{med['quantity']}}"><br>
-         <!-- <button name="update_medication" value="{{ med['medication_id'] }}" type="submit">Submit</button> -->
+    <form action="/update-supplier" method="POST">
+        <input type="hidden" name="supplier_id" value="{{supply['supplier_id']}}">
+        Supplier Name:  <input class="input-attribute" type="text" name="name" value="{{supply['name']}}"><br>
+        Zip: <input class="input-attribute" type="number" maxlength="5" name="zip_code" value="{{supply['zip_code']}}"><br>
+        Phone: <input class="input-attribute" type="number" name="phone" maxlength="10" value="{{supply['phone']}}"><br>
+
        <input type="submit" value="Submit"><br>
-        <a href="/medications" role="button">Cancel</a>
+        <a href="/suppliers" role="button">Cancel</a>
     </form>
     </div>
 

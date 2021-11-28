@@ -25,11 +25,12 @@ Notes:
 - use command 'pip install mysqlclient' for MacOS (https://stackoverflow.com/questions/454854/no-module-named-mysqldb)
 
 Backlog:
-1. Add update functionality to all pages (completed: medications, techs)
-    - Not all fields should be allowed to be edited (e.g. medication name) - does the project requirements 
+1. Add update functionality to all pages (completed: medications, techs, suppliers)
+    - Not all fields should be allowed to be edited (e.g. medication name, supplier name, etc) - does the project requirements 
     want us to enable updating for everything
 2. Add search functionality for medications page
 3. Dropdown menus for FKs to allow for updating and inserting into tables
-4. Clean up schema diagram
-5. Use bootstrap or other CSS framework to clean up UI
-6. Deploy on heroku and clearDB for portfolio
+4. CSS for new pages, buttons, etc
+5. Clean up schema diagram
+6. Use bootstrap or other CSS framework to clean up UI
+7. Deploy on heroku and clearDB for portfolio
