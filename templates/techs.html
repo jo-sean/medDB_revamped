@@ -45,7 +45,11 @@
                     <td>{{tech['employee_id']}}</td>
                     <td>{{tech['first_name']}}</td>
                     <td>{{tech['last_name']}}</td>
-                    <td><button type="button">Edit</button></td>
+                    <td>
+                        <form action="/update-tech" method="GET">
+                            <button type="submit" name="employee_id" value="{{ tech['employee_id'] }}">Edit</button>
+                        </form>
+                    </td>
                     <td>
                         <form action="/techs" method="POST">
                             <button type="submit" name="delete" value="{{ tech['employee_id'] }}">Delete</button>

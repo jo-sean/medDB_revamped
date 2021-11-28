@@ -58,7 +58,11 @@
                         <td>{{row['unit_price']}}</td>
                         <td>{{row['total_price']}}</td>
                         <td>{{row['date']}}</td>
-                        <td><button type="button">Edit</button></td>
+                        <td>
+                            <form action="/update-order" method="GET">
+                                <button type="submit" name="purchase_id" value="{{ row['purchase_id'] }}">Edit</button>
+                            </form>
+                        </td>
                         <td>
                             <form action="/orders" method="POST">
                                 <button type="submit" name="delete" value="{{ row['purchase_id'] }}">Delete</button>

@@ -47,7 +47,11 @@
                         <td>{{pres['patient_id']}}</td>
                         <td>{{pres['medication_id']}}</td>
                         <td>{{pres['quantity']}}</td>
-                        <td><button type="button">Edit</button></td>
+                        <td>
+                            <form action="/update-rx" method="GET">
+                                <button type="submit" name="prescription_id" value="{{ pres['prescription_id'] }}">Edit</button>
+                            </form>
+                        </td>
                         <td>
                             <form action="/prescriptions" method="POST">
                                 <button type="submit" name="delete" value="{{ pres['prescription_id'] }}">Delete</button>

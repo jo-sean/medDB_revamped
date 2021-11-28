@@ -46,7 +46,11 @@
                         <td>{{supply['name']}}</td>
                         <td>{{supply['zip_code']}}</td>
                         <td>{{supply['phone']}}</td>
-                        <td><button type="button">Edit</button></td>
+                        <td>
+                            <form action="/update-supplier" method="GET">
+                                <button type="submit" name="supplier_id" value="{{ supply['supplier_id'] }}">Edit</button>
+                            </form>
+                        </td>
                         <td>
                             <form action="/suppliers" method="POST">
                                 <button type="submit" name="delete" value="{{ supply['supplier_id'] }}">Delete</button>

@@ -10,7 +10,9 @@ app = Flask(__name__)
 
 # Connect to database when server is started
 db_connection = db.connect_to_database()
-db_connection(True)
+
+
+# db_connection(True)
 
 
 # ************************* ROUTING *************************
@@ -273,13 +275,40 @@ def update_medication():
         quantity = request.form['quantity']
 
         query1 = "UPDATE medications SET drug_name = '%s', dosage_form = '%s', dose_number = '%s', dose_unit = '%s', quantity = '%s' WHERE medication_id = '%s';" % (
-        drug_name, dosage_form, dose_number, dose_unit, quantity, medication_id)
+            drug_name, dosage_form, dose_number, dose_unit, quantity, medication_id)
         db.execute_query(db_connection, query1)
 
         # Fetch all
         query2 = "SELECT * FROM medications;"
         med_info = db.execute_query(db_connection, query2).fetchall()
         return render_template('medications.html', med_info=med_info)
+
+
+@app.route('/update-tech', methods=['GET', 'POST'])
+def update_tech():
+    # Bring up new page with data auto-populated
+    if request.method == 'GET':
+        employee_id = request.args.get("employee_id")
+
+        query = "SELECT * FROM `pharmacy_technicians` WHERE `employee_id` = '%s';" % employee_id
+        cursor = db.execute_query(db_connection, query)
+        tech = cursor.fetchone()
+        return render_template('update-tech.html', tech=tech)
+    # Submit updates
+    if request.method == 'POST':
+        employee_id = request.form['employee_id']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+
+        query1 = "UPDATE pharmacy_technicians SET first_name = '%s', last_name = '%s' WHERE employee_id = '%s';" % (
+            first_name, last_name, employee_id)
+        db.execute_query(db_connection, query1)
+
+        # Fetch all
+        query2 = "SELECT * FROM pharmacy_technicians;"
+        tech_info = db.execute_query(db_connection, query2).fetchall()
+        return render_template('techs.html', tech_info=tech_info)
+
 
 # ************************* LISTENER *************************
 if __name__ == "__main__":

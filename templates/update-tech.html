@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Update Tech </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <nav>
+          <a class="nav-link" href="/">Home Page</a>|
+          <a class="nav-link" href="/medications">Medication Inventory</a> |
+          <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+          <a class="nav-link" href="/orders">Purchase Orders</a> |
+          <a class="nav-link" href="/suppliers">Suppliers</a> |
+          <a class="nav-link" href="/patients">Patients</a> |
+          <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+        </nav>
+    </div>
+
+    <div>
+        <h2 class="page-title">Update Selected Technician</h2>
+    </div>
+    <div>
+    <form action="/update-tech" method="POST">
+        <input type="hidden" name="employee_id" value="{{tech['employee_id']}}">
+        First Name:  <input class="input-attribute" type="text" name="first_name" value="{{tech['first_name']}}"><br>
+        Last Name: <input class="input-attribute" type="text" name="last_name" value="{{tech['last_name']}}"><br>
+
+       <input type="submit" value="Submit"><br>
+        <a href="/techs" role="button">Cancel</a>
+    </form>
+    </div>
+
+</body>
+
+</html>

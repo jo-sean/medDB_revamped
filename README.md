@@ -20,3 +20,16 @@ connect your database.
 340DB='cs340_{ONID_USERNAME}'
 
 You can then edit the PORT inside the app.py to whatever you wish and run app.py.
+
+Notes:
+- use command 'pip install mysqlclient' for MacOS (https://stackoverflow.com/questions/454854/no-module-named-mysqldb)
+
+Backlog:
+1. Add update functionality to all pages (completed: medications, techs)
+    - Not all fields should be allowed to be edited (e.g. medication name) - does the project requirements 
+    want us to enable updating for everything
+2. Add search functionality for medications page
+3. Dropdown menus for FKs to allow for updating and inserting into tables
+4. Clean up schema diagram
+5. Use bootstrap or other CSS framework to clean up UI
+6. Deploy on heroku and clearDB for portfolio
