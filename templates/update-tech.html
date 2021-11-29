@@ -21,19 +21,28 @@
         </nav>
     </div>
 
-    <div>
+    <sec>
         <h2 class="page-title">Update Selected Technician</h2>
-    </div>
-    <div>
+    </sec>
+    <section>
     <form action="/update-tech" method="POST">
-        <input type="hidden" name="employee_id" value="{{tech['employee_id']}}">
-        First Name:  <input class="input-attribute" type="text" name="first_name" value="{{tech['first_name']}}"><br>
-        Last Name: <input class="input-attribute" type="text" name="last_name" value="{{tech['last_name']}}"><br>
+        <fieldset>
+         <label>First Name</label>
+        <input type="hidden" name="employee_id" value="{{tech['employee_id']}}" required>
+         <label>Last Name</label>
+        <section>
+            <input class="input-attribute" type="text" name="first_name" value="{{tech['first_name']}}" required>
+        </section>
+        <section>
+            <input class="input-attribute" type="text" name="last_name" value="{{tech['last_name']}}" required>
+        </section>
 
-       <input type="submit" value="Submit"><br>
-        <a href="/techs" role="button">Cancel</a>
+        <br>
+       <input type="submit" value="Submit">
+         <button><a class="cancelToHome" href="/techs" role="button">Cancel</a> </button>
+        </fieldset>
     </form>
-    </div>
+    </section>
 
 </body>
 
