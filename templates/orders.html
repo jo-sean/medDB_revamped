@@ -77,9 +77,26 @@
         </div>
         <form action="/orders" method="post">
             <fieldset>
-            <input class="input-attribute" type="text" placeholder="Supplier ID" name="supplier_id" required>
-            <input class="input-attribute" type="text" placeholder="Employee ID" name="employee_id" >
-            <input class="input-attribute" type="text" placeholder="Medication ID" name="medication_id" required>
+
+             <select name="supplier_id" class="input-attribute" required>
+                    <option value=""> -- Supplier ID -- </option>
+                    {% for s in supplier_info %}
+                    <option value="{{s['supplier_id']}}"> {{s['supplier_id']}}</option>
+                    {% endfor %}
+                </select>
+                <select name="employee_id" class="input-attribute">
+                    <option value=""> -- Employee ID -- </option>
+                    {% for e in employee_info %}
+                    <option value="{{e['employee_id']}}"> {{e['employee_id']}}</option>
+                    {% endfor %}
+                </select>
+                <select name="medication_id" class="input-attribute" required>
+                    <option value=""> -- Medication ID -- </option>
+                    {% for m in medications_info %}
+                    <option value="{{m['medication_id']}}"> {{m['medication_id']}}</option>
+                    {% endfor %}
+                </select>
+
             <input class="input-attribute" type="number" min="0" placeholder="Quantity" name="quantity" required>
             <input class="input-attribute" type="number" min="0" placeholder="Unit Price" name="unit_price" required>
             <input class="input-attribute" type="date" placeholder="date" name="date" required>

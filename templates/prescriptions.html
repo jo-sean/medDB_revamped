@@ -57,20 +57,30 @@
             </table>
     </div>
 
-    <div>
+    <section>
             <div>
-                <h2 class="page-title">Add Prescription</h2>
+                <h2 class="page-title">Add a Prescription</h2>
             </div>
             <form action="/prescriptions" method="post">
                 <fieldset>
-                <input class="input-attribute" type="text" placeholder="Enter patient ID" name="patient_id" required/>
-                <input class="input-attribute" type="text" placeholder="Enter medication ID" name="medication_id" required/>
-                <input class="input-attribute" type="number" min="0" placeholder="Enter quantity" name="qty" required/>
+                <select name="patient_id" class="input-attribute" required>
+                    <option value=""> -- Patient ID -- </option>
+                    {% for p in patients_info %}
+                    <option value="{{p['patient_id']}}"> {{p['patient_id']}}</option>
+                    {% endfor %}
+                </select>
+                <select name="medication_id" class="input-attribute" required>
+                    <option value=""> -- Medication ID -- </option>
+                    {% for m in medications_info %}
+                    <option value="{{m['medication_id']}}"> {{m['medication_id']}}</option>
+                    {% endfor %}
+                </select>
+                <input class="input-attribute" type="number" min="0" placeholder="Enter quantity" name="quantity" required/>
             <div class="button-container">
                 <input type="submit" id="add_prescription" value="Add Prescription">
             </div>
             </fieldset>
             </form>
-    </div>
+    </section>
 </body>
 </html>

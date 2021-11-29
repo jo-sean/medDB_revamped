@@ -190,7 +190,17 @@ def prescriptions():
     if request.method == 'GET':
         query = "SELECT * FROM `prescriptions`;"
         prescription_info = db.execute_query(db_connection, query).fetchall()
-        return render_template("prescriptions.html", prescription_info=prescription_info)
+
+        # Fetch all patient ids for drop down
+        query2 = "SELECT patient_id FROM patients;"
+        patients_info = db.execute_query(db_connection, query2)
+
+        # Fetch all medication ids for drop down
+        query3 = "SELECT medication_id FROM medications;"
+        medications_info = db.execute_query(db_connection, query3)
+
+        return render_template("prescriptions.html", prescription_info=prescription_info, patients_info=patients_info,
+                               medications_info=medications_info)
 
     # POST requests -> insert form data
     if request.method == 'POST':
@@ -204,11 +214,10 @@ def prescriptions():
             patient_id = request.form['patient_id']
             medication_id = request.form['medication_id']
             quantity = request.form['quantity']
-            query = "INSERT INTO `prescriptions` (`patient_id`,`medication_id`, `quantity`) VALUES (%s, %s, %s);"
-            data = (patient_id, medication_id, quantity)
+            query = "INSERT INTO `prescriptions` (`patient_id`,`medication_id`, `quantity`) VALUES (%s, %s, %s);" % (patient_id, medication_id, quantity)
 
             # Execute query to insert data
-            db.execute_query(db_connection, query, data)
+            db.execute_query(db_connection, query)
 
         # Redirect to same webpage after form submission
         return redirect(url_for('prescriptions'))
@@ -224,7 +233,21 @@ def orders():
     if request.method == 'GET':
         query = "SELECT * FROM `purchase_orders`;"
         order_info = db.execute_query(db_connection, query).fetchall()
-        return render_template('orders.html', order_info=order_info)
+
+        # Fetch all patient ids for drop down
+        query2 = "SELECT supplier_id FROM suppliers;"
+        supplier_info = db.execute_query(db_connection, query2)
+
+        # Fetch all medication ids for drop down
+        query3 = "SELECT employee_id FROM pharmacy_technicians;"
+        employee_info = db.execute_query(db_connection, query3)
+
+        # Fetch all medication ids for drop down
+        query4 = "SELECT medication_id FROM medications;"
+        medications_info = db.execute_query(db_connection, query4)
+
+        return render_template('orders.html', order_info=order_info, supplier_info=supplier_info,
+                               employee_info=employee_info, medications_info=medications_info)
 
     # POST requests -> insert form data
     if request.method == 'POST':
@@ -240,15 +263,21 @@ def orders():
             medication_id = request.form['medication_id']
             quantity = request.form['quantity']
             unit_price = request.form['unit_price']
-            total_price = request.form['total_price']
+            total_price = str(int(unit_price) * int(quantity))
             date = request.form['date']
 
+            if len(employee_id) == 0:
+                employee_id = 'NULL'
+
             # Define query and data
-            query = "INSERT INTO `purchase_orders` (`supplier_id`, `employee_id`, `medication_id`, `quantity`, `unit_price`, `total_price`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s);"
-            data = (supplier_id, employee_id, medication_id, quantity, unit_price, total_price, date)
+            query = "INSERT INTO `purchase_orders` (`supplier_id`, `employee_id`, `medication_id`, `quantity`, " \
+                    "`unit_price`, `total_price`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s);" % (
+                supplier_id, employee_id, medication_id, quantity, unit_price, total_price, date)
+
+            print(query)
 
             # Insert
-            db.execute_query(db_connection, query, data)
+            db.execute_query(db_connection, query)
 
         # After form submission -> reload same page
         return redirect(url_for('orders'))
