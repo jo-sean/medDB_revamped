@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 
 <head>
@@ -24,19 +24,39 @@
     <div>
         <h2 class="page-title">Update Selected Medication</h2>
     </div>
-    <div>
+    <section>
     <form action="/update-medication" method="POST">
+        <fieldset>
         <input type="hidden" name="medication_id" value="{{med['medication_id']}}">
-        Drug Name:  <input class="input-attribute" type="text" name="drug_name" value="{{med['drug_name']}}"><br>
-        Dosage Form: <input class="input-attribute" type="text" name="dosage_form" value="{{med['dosage_form']}}"><br>
-        Dose: <input class="input-attribute" type="number" name="dose_number" value="{{med['dose_number']}}"><br>
-        Dose unit: <input class="input-attribute" type="text" name="dose_unit" value="{{med['dose_unit']}}"><br>
-        Quantity: <input class="input-attribute" type="number" name="quantity" value="{{med['quantity']}}"><br>
+            <label>Drug Name </label>
+            <section>
+            <input class="input-attribute" type="text" name="drug_name" value="{{med['drug_name']}}" required>
+            </section>
+            <label>Dosage Form </label>
+            <section>
+
+                <input class="input-attribute" type="text" name="dosage_form" value="{{med['dosage_form']}}" required>
+            </section>
+            <label>Dose </label>
+            <section>
+                <input class="input-attribute" type="number" name="dose_number" value="{{med['dose_number']}}" required>
+            </section>
+            <label>Dose unit </label>
+            <section>
+                <input class="input-attribute" type="text" name="dose_unit" value="{{med['dose_unit']}}" required>
+            </section>
+            <label>Quantity </label>
+            <section>
+                <input class="input-attribute" type="number" name="quantity" value="{{med['quantity']}}" required>
+            </section>
+
+            <br>
          <!-- <button name="update_medication" value="{{ med['medication_id'] }}" type="submit">Submit</button> -->
-       <input type="submit" value="Submit"><br>
-        <a href="/medications" role="button">Cancel</a>
+       <input type="submit" value="Submit">
+        <button><a class="cancelToHome" href="/medications" role="button">Cancel</a></button>
+        </fieldset>
     </form>
-    </div>
+    </section>
 
 </body>
 

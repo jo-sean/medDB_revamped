@@ -36,7 +36,6 @@
                         <th>patient_id</th>
                         <th>medication_id</th>
                         <th>quantity</th>
-                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -47,11 +46,6 @@
                         <td>{{pres['patient_id']}}</td>
                         <td>{{pres['medication_id']}}</td>
                         <td>{{pres['quantity']}}</td>
-                        <td>
-                            <form action="/update-rx" method="GET">
-                                <button type="submit" name="prescription_id" value="{{ pres['prescription_id'] }}">Edit</button>
-                            </form>
-                        </td>
                         <td>
                             <form action="/prescriptions" method="POST">
                                 <button type="submit" name="delete" value="{{ pres['prescription_id'] }}">Delete</button>
@@ -69,9 +63,9 @@
             </div>
             <form action="/prescriptions" method="post">
                 <fieldset>
-                <input class="input-attribute" type="text" placeholder="Enter patient ID" name="patient_id" />
-                <input class="input-attribute" type="text" placeholder="Enter medication ID" name="medication_id" />
-                <input class="input-attribute" type="number" placeholder="Enter quantity" name="qty" />
+                <input class="input-attribute" type="text" placeholder="Enter patient ID" name="patient_id" required/>
+                <input class="input-attribute" type="text" placeholder="Enter medication ID" name="medication_id" required/>
+                <input class="input-attribute" type="number" min="0" placeholder="Enter quantity" name="qty" required/>
             <div class="button-container">
                 <input type="submit" id="add_prescription" value="Add Prescription">
             </div>

@@ -22,21 +22,49 @@
     </div>
 
     <div>
-        <h2 class="page-title">Update Selected Medication</h2>
+        <h2 class="page-title">Update Selected Patient</h2>
     </div>
-    <div>
-    <form action="/update-medication" method="POST">
-        <input type="hidden" name="medication_id" value="{{med['medication_id']}}">
-        Drug Name:  <input class="input-attribute" type="text" name="drug_name" value="{{med['drug_name']}}"><br>
-        Dosage Form: <input class="input-attribute" type="text" name="dosage_form" value="{{med['dosage_form']}}"><br>
-        Dose: <input class="input-attribute" type="number" name="dose_number" value="{{med['dose_number']}}"><br>
-        Dose unit: <input class="input-attribute" type="text" name="dose_unit" value="{{med['dose_unit']}}"><br>
-        Quantity: <input class="input-attribute" type="number" name="quantity" value="{{med['quantity']}}"><br>
-         <!-- <button name="update_medication" value="{{ med['medication_id'] }}" type="submit">Submit</button> -->
-       <input type="submit" value="Submit"><br>
-        <a href="/medications" role="button">Cancel</a>
+    <section>
+    <form action="/update-patient" method="POST">
+        <fieldset>
+        <input type="hidden" name="patient_id" value="{{patient['patient_id']}}">
+            <label>First Name</label>
+            <section>
+                <input class="input-attribute" type="text" name="first_name" value="{{patient['first_name']}}" required>
+            </section>
+
+            <label>Last Name</label>
+            <section>
+                <input class="input-attribute" type="text" name="last_name" value="{{patient['last_name']}}" required>
+            </section>
+
+            <label>Phone</label>
+            <section>
+                <input class="input-attribute" type="number" name="phone" minlength="10" maxlength="10" value="{{patient['phone']}}" required>
+            </section>
+
+            <label>Street Number</label>
+            <section>
+                <input class="input-attribute" type="number" name="street_number" value="{{patient['street_number']}}" required>
+            </section>
+
+            <label>Street name</label>
+            <section>
+                <input class="input-attribute" type="text" name="street_name" value="{{patient['street_name']}}" required>
+            </section>
+
+            <label>Zip Code</label>
+            <section>
+                <input class="input-attribute" type="number" name="zip_code" minlength="5" maxlength="5" value="{{patient['zip_code']}}" required>
+            </section>
+
+            <br>
+
+       <input type="submit" value="Submit">
+        <button><a class="cancelToHome" href="/patients" role="button">Cancel</a></button>
+        </fieldset>
     </form>
-    </div>
+    </section>
 
 </body>
 

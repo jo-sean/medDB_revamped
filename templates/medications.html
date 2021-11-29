@@ -32,11 +32,10 @@
         </button>
     </div>
 
-    <div>
+    <section>
         <div>
             <h2 class="page-title">Medications</h2>
         </div>
-        <div>
             <table id="medications">
                 <caption>
                     Medications
@@ -77,24 +76,25 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </section>
 
-        </div>
+        <section>
             <div>
                 <h2 class="page-title">Add Medication</h2>
             </div>
             <form action="/medications" method="post">
                 <fieldset>
-                <input class="input-attribute" type="text" placeholder="drug name" name="drug_name" >
-                <input class="input-attribute" type="text" placeholder="dose form" name="dosage_form" >
-                <input class="input-attribute" type="number" placeholder="dose number" name="dose_number" >
-                <input class="input-attribute" type="text" placeholder="dose unit" name="dose_unit" >
-                <input class="input-attribute" type="number" placeholder="quantity" name="quantity" >
+                <input class="input-attribute" type="text" placeholder="drug name" name="drug_name" required>
+                <input class="input-attribute" type="text" placeholder="dose form" name="dosage_form" required>
+                <input class="input-attribute" type="number" min="0" placeholder="dose number" name="dose_number" required>
+                <input class="input-attribute" type="text" placeholder="dose unit" name="dose_unit" required>
+                <input class="input-attribute" type="number" min="0" placeholder="quantity" name="quantity" required>
                 <div class="button-container">
                     <input type="submit" id="add_meds" value="Add Medication">
                 </div>
                     </fieldset>
             </form>
-    </div>
+    </section>
 </body>
 
 </html>

@@ -336,6 +336,36 @@ def update_supplier():
         supplier_info = db.execute_query(db_connection, query2).fetchall()
         return render_template('suppliers.html', supplier_info=supplier_info)
 
+
+@app.route('/update-patient', methods=['GET', 'POST'])
+def update_patient():
+    # Bring up new page with data auto-populated
+    if request.method == 'GET':
+        patient_id = request.args.get("patient_id")
+        query = "SELECT * FROM `patients` WHERE `patient_id` = '%s';" % patient_id
+        cursor = db.execute_query(db_connection, query)
+        patient = cursor.fetchone()
+        return render_template('update-patient.html', patient=patient)
+
+    # Submit updates
+    if request.method == 'POST':
+        patient_id = request.form['patient_id']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        phone = request.form['phone']
+        street_number = request.form['street_number']
+        street_name = request.form['street_name']
+        zip_code = request.form['zip_code']
+
+        query1 = "UPDATE patients SET first_name = '%s', last_name = '%s', phone = '%s', street_number = '%s', street_name = '%s', zip_code = '%s' WHERE patient_id = '%s';" % (first_name, last_name, phone, street_number, street_name, zip_code, patient_id)
+        db.execute_query(db_connection, query1)
+
+        # Fetch all
+        query2 = "SELECT * FROM patients;"
+        pt_info = db.execute_query(db_connection, query2).fetchall()
+        return render_template('patients.html', pt_info=pt_info)
+
+
 # ************************* LISTENER *************************
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 7888))

@@ -26,13 +26,25 @@
     </div>
     <div>
     <form action="/update-supplier" method="POST">
+        <fieldset>
         <input type="hidden" name="supplier_id" value="{{supply['supplier_id']}}">
-        Supplier Name:  <input class="input-attribute" type="text" name="name" value="{{supply['name']}}"><br>
-        Zip: <input class="input-attribute" type="number" maxlength="5" name="zip_code" value="{{supply['zip_code']}}"><br>
-        Phone: <input class="input-attribute" type="number" name="phone" maxlength="10" value="{{supply['phone']}}"><br>
+        <label>Supplier Name</label>
+        <section>
+            <input class="input-attribute" type="text" name="name" value="{{supply['name']}}" required>
+        </section>
+        <label>Zip</label>
+        <section>
+            <input class="input-attribute" type="number" maxlength="5" name="zip_code" value="{{supply['zip_code']}}" required>
+        </section>
+         <label>Phone</label>
+        <section>
+            <input class="input-attribute" type="number" name="phone" maxlength="10" value="{{supply['phone']}}" required>
+        </section>
 
-       <input type="submit" value="Submit"><br>
-        <a href="/suppliers" role="button">Cancel</a>
+            <br>
+       <input type="submit" value="Submit">
+        <button><a class="cancelToHome" href="/suppliers" role="button">Cancel</a></button>
+        </fieldset>
     </form>
     </div>
 

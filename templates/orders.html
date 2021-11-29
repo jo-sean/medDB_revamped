@@ -42,7 +42,6 @@
                     <th>unit_price</th>
                     <th>total_price</th>
                     <th>date</th>
-                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -58,11 +57,6 @@
                         <td>{{row['unit_price']}}</td>
                         <td>{{row['total_price']}}</td>
                         <td>{{row['date']}}</td>
-                        <td>
-                            <form action="/update-order" method="GET">
-                                <button type="submit" name="purchase_id" value="{{ row['purchase_id'] }}">Edit</button>
-                            </form>
-                        </td>
                         <td>
                             <form action="/orders" method="POST">
                                 <button type="submit" name="delete" value="{{ row['purchase_id'] }}">Delete</button>
@@ -83,12 +77,12 @@
         </div>
         <form action="/orders" method="post">
             <fieldset>
-            <input class="input-attribute" type="text" placeholder="Supplier ID" name="supplier_id" >
+            <input class="input-attribute" type="text" placeholder="Supplier ID" name="supplier_id" required>
             <input class="input-attribute" type="text" placeholder="Employee ID" name="employee_id" >
-            <input class="input-attribute" type="text" placeholder="Medication ID" name="medication_id" >
-            <input class="input-attribute" type="number" placeholder="Quantity" name="quantity" >
-            <input class="input-attribute" type="number" placeholder="Unit Price" name="unit_price" >
-            <input class="input-attribute" type="date" placeholder="date" name="date" >
+            <input class="input-attribute" type="text" placeholder="Medication ID" name="medication_id" required>
+            <input class="input-attribute" type="number" min="0" placeholder="Quantity" name="quantity" required>
+            <input class="input-attribute" type="number" min="0" placeholder="Unit Price" name="unit_price" required>
+            <input class="input-attribute" type="date" placeholder="date" name="date" required>
             <div class="button-container">
                  <input type="submit" id="add_orders" value="Add Order">
             </div>

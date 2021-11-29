@@ -70,9 +70,9 @@
             </div>
             <form action="/suppliers" method="post">
                 <fieldset>
-                <input class="input-attribute" type="text" placeholder="Enter supplier name"  name="name"/>
-                <input class="input-attribute" type="number" placeholder="5 digit zip" name="zip_code"/>
-                <input class="input-attribute" type="number" placeholder="Phone-no dashes" name="phone" maxlength="10"/>
+                <input class="input-attribute" type="text" placeholder="Enter supplier name" required name="name"/>
+                <input class="input-attribute" type="number" min="0" placeholder="5 digit zip" required maxlength="5" minlength="5" name="zip_code"/>
+                <input class="input-attribute" type="number" min="0" placeholder="Phone-no dashes" required name="phone" minlength="10" maxlength="10"/>
             <div class="button-container">
                 <input type="submit" id="add_supplier" value="Add Supplier">
             </div>
