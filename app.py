@@ -52,7 +52,7 @@ def medications():
             quantity = request.form['quantity']
 
             # Define query and data
-            query = "INSERT INTO `medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
+            query = "INSERT INTO `  medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
             data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
 
             # Insert
@@ -61,15 +61,19 @@ def medications():
         # After form submission -> reload same page
         return redirect(url_for('medications'))
 
-    # # PUT request -> update tuple
-    # if request.method == 'PUT':
-    #
-    # # DELETE request -> delete tuple
-    # if request.method == 'DELETE':
-    #     medication_id = request.form.delete()
-    #     query = "DELETE FROM medications WHERE medication_id = '%s';" (medication_id)
-    #     cursor = db.execute_query(db_connection=db_connection, query=query)
-    #     return redirect('/medications')
+
+@app.route('/medication-search', methods=['POST', 'GET'])
+def search_medications():
+    """Serves: medication-search.html"""
+    medications = request.form['search']
+
+    query = "SELECT * FROM medications WHERE drug_name = '%s' ORDER BY drug_name;" % (medications)
+    cursor = db.execute_query(db_connection, query)
+
+    # Display the department search results
+    med_search = cursor.fetchall()
+
+    return render_template("medication-search.html", med_search=med_search)
 
 
 @app.route('/suppliers', methods=['GET', 'POST'])

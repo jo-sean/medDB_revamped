@@ -22,7 +22,7 @@
     </div>
 
     <div>
-        <h2 class="page-title">Search Medication</h2>
+        <h2 class="page-title">New Medication Search</h2>
     </div>
     <div>
         <form action="/medication-search" method="POST">
@@ -40,7 +40,7 @@
         </div>
             <table id="medications">
                 <caption>
-                    Medication Search Results
+                    Medications
                 </caption>
                 <thead>
                     <tr>
@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
 
-                    {% for row in med_info %}
+                    {% for row in med_search %}
                     <tr>
                         <td>{{row['medication_id']}}</td>
                         <td>{{row['drug_name']}}</td>
@@ -78,25 +78,12 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+        <button><a class="cancelToHome" href="/medications" role="button">Return to all Medications</a></button>
         </section>
 
-        <section>
-            <div>
-                <h2 class="page-title">Add Medication</h2>
-            </div>
-            <form action="/medications" method="post">
-                <fieldset>
-                <input class="input-attribute" type="text" placeholder="drug name" name="drug_name" required>
-                <input class="input-attribute" type="text" placeholder="dose form" name="dosage_form" required>
-                <input class="input-attribute" type="number" min="0" placeholder="dose number" name="dose_number" required>
-                <input class="input-attribute" type="text" placeholder="dose unit" name="dose_unit" required>
-                <input class="input-attribute" type="number" min="0" placeholder="quantity" name="quantity" required>
-                <div class="button-container">
-                    <input type="submit" id="add_meds" value="Add Medication">
-                </div>
-                    </fieldset>
-            </form>
-    </section>
+
+
 </body>
 
 </html>
