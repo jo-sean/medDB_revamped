@@ -81,19 +81,19 @@
              <select name="supplier_id" class="input-attribute" required>
                     <option value=""> -- Supplier ID -- </option>
                     {% for s in supplier_info %}
-                    <option value="{{s['supplier_id']}}"> {{s['supplier_id']}}</option>
+                    <option value="{{s['supplier_id']}}"> {{s['name']}}</option>
                     {% endfor %}
                 </select>
                 <select name="employee_id" class="input-attribute">
                     <option value=""> -- Employee ID -- </option>
                     {% for e in employee_info %}
-                    <option value="{{e['employee_id']}}"> {{e['employee_id']}}</option>
+                    <option value="{{e['employee_id']}}"> {{e['first_name']}} {{e['last_name']}}</option>
                     {% endfor %}
                 </select>
                 <select name="medication_id" class="input-attribute" required>
                     <option value=""> -- Medication ID -- </option>
                     {% for m in medications_info %}
-                    <option value="{{m['medication_id']}}"> {{m['medication_id']}}</option>
+                    <option value="{{m['medication_id']}}"> {{m['drug_name']}}</option>
                     {% endfor %}
                 </select>
 

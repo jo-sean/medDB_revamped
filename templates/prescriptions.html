@@ -66,13 +66,13 @@
                 <select name="patient_id" class="input-attribute" required>
                     <option value=""> -- Patient ID -- </option>
                     {% for p in patients_info %}
-                    <option value="{{p['patient_id']}}"> {{p['patient_id']}}</option>
+                    <option value="{{p['patient_id']}}"> {{p['first_name']}} {{p['last_name']}}</option>
                     {% endfor %}
                 </select>
                 <select name="medication_id" class="input-attribute" required>
                     <option value=""> -- Medication ID -- </option>
                     {% for m in medications_info %}
-                    <option value="{{m['medication_id']}}"> {{m['medication_id']}}</option>
+                    <option value="{{m['medication_id']}}"> {{m['drug_name']}}</option>
                     {% endfor %}
                 </select>
                 <input class="input-attribute" type="number" min="0" placeholder="Enter quantity" name="quantity" required/>

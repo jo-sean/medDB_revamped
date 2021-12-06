@@ -197,11 +197,11 @@ def prescriptions():
         prescription_info = db.execute_query(db_connection, query).fetchall()
 
         # Fetch all patient ids for drop down
-        query2 = "SELECT patient_id FROM patients;"
+        query2 = "SELECT patient_id, first_name, last_name FROM patients;"
         patients_info = db.execute_query(db_connection, query2)
 
         # Fetch all medication ids for drop down
-        query3 = "SELECT medication_id FROM medications;"
+        query3 = "SELECT medication_id, drug_name FROM medications;"
         medications_info = db.execute_query(db_connection, query3)
 
         return render_template("prescriptions.html", prescription_info=prescription_info, patients_info=patients_info,
@@ -240,15 +240,15 @@ def orders():
         order_info = db.execute_query(db_connection, query).fetchall()
 
         # Fetch all patient ids for drop down
-        query2 = "SELECT supplier_id FROM suppliers;"
+        query2 = "SELECT supplier_id, name FROM suppliers;"
         supplier_info = db.execute_query(db_connection, query2)
 
         # Fetch all medication ids for drop down
-        query3 = "SELECT employee_id FROM pharmacy_technicians;"
+        query3 = "SELECT employee_id, first_name, last_name FROM pharmacy_technicians;"
         employee_info = db.execute_query(db_connection, query3)
 
         # Fetch all medication ids for drop down
-        query4 = "SELECT medication_id FROM medications;"
+        query4 = "SELECT medication_id, drug_name FROM medications;"
         medications_info = db.execute_query(db_connection, query4)
 
         return render_template('orders.html', order_info=order_info, supplier_info=supplier_info,
