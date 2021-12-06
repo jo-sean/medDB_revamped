@@ -21,6 +21,18 @@
         </nav>
     </div>
 
+    {% block content %}
+    <div>
+    {% for message in get_flashed_messages() %}
+    <div>
+       <p class="error_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
     <div>
         <h2 class="page-title">Update Supplier</h2>
     </div>

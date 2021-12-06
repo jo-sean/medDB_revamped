@@ -263,17 +263,21 @@ a.cancelToHome:hover {
   color: #0D5257;
   font-weight: 500;
   text-align: center;
-  font-size: 1.8rem; }
+  font-size: 1.8rem;
+  }
 
 input:focus {
-  outline: none; }
+  outline: none;
+  }
 
 select:focus {
-  outline: none; }
+  outline: none;
+  }
 
 select {
   text-align: center;
-  text-align-last: center; }
+  text-align-last: center;
+   }
 
 #submit-button {
   background-color: #FDD26E;
@@ -285,12 +289,14 @@ select {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 5px 10px 5px 10px;
-  text-decoration: none;}
+  text-decoration: none;
+  }
 
 #submit-button:hover {
   background-color: #0D5257; 
   border: 2px solid #0D5257; 
-  color: #FFFFFF}
+  color: #FFFFFF;
+  }
 
 .button-container {
   padding: 20px;
@@ -312,7 +318,7 @@ select {
 #search-button:hover {
 background-color: #0D5257; 
 border: 2px solid #0D5257; 
-color: #FFFFFF
+color: #FFFFFF;
 }
 
 .logo {
@@ -320,6 +326,11 @@ color: #FFFFFF
     max-width: 30%;
     height: auto;
   }
+
+.error_message {
+    background-color: #FDD26E;
+    color: red;
+}
 
 #citation {
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;

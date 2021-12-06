@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 import database.db_connector as db
 
@@ -7,6 +7,7 @@ import database.db_connector as db
 
 # ************************* CONFIGURATION *************************
 app = Flask(__name__)
+app.secret_key = "SUPER_SECRET_KEY"
 
 # Connect to database when server is started
 db_connection = db.connect_to_database()
@@ -56,7 +57,11 @@ def medications():
             data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
 
             # Insert
-            db.execute_query(db_connection, query, data)
+            try:
+                db.execute_query(db_connection, query, data)
+            except:
+                flash("Error: duplicate entry")
+                return redirect(url_for('medications'))
 
         # After form submission -> reload same page
         return redirect(url_for('medications'))
@@ -106,7 +111,11 @@ def suppliers():
             data = (name, zip_code, phone)
 
             # Insert
-            db.execute_query(db_connection, query, data)
+            try:
+                db.execute_query(db_connection, query, data)
+            except:
+                flash("Error: duplicate entry")
+                return redirect(url_for('suppliers'))
 
         # After form submission -> reload same page
         return redirect(url_for('suppliers'))
@@ -145,8 +154,11 @@ def patients():
             data = (first_name, last_name, phone, street_number, street_name, zip_code)
 
             # Insert
-
-            db.execute_query(db_connection, query, data)
+            try:
+                db.execute_query(db_connection, query, data)
+            except:
+                flash("Error: duplicate entry")
+                return redirect(url_for('patients'))
 
         # After form submission -> reload same page
         return redirect(url_for('patients'))
@@ -179,7 +191,11 @@ def techs():
             data = (first_name, last_name)
 
             # Execute query to insert data
-            db.execute_query(db_connection, query, data)
+            try:
+                db.execute_query(db_connection, query, data)
+            except:
+                flash("Error: duplicate entry")
+                return redirect(url_for('techs'))
 
         # Redirect to same webpage after form submission
         return redirect(url_for('techs'))
@@ -222,7 +238,11 @@ def prescriptions():
             query = "INSERT INTO `prescriptions` (`patient_id`,`medication_id`, `quantity`) VALUES (%s, %s, %s);" % (patient_id, medication_id, quantity)
 
             # Execute query to insert data
-            db.execute_query(db_connection, query)
+            try:
+                db.execute_query(db_connection, query)
+            except:
+                flash("Error: duplicate entry")
+                return redirect(url_for('prescriptions'))
 
         # Redirect to same webpage after form submission
         return redirect(url_for('prescriptions'))
@@ -268,7 +288,7 @@ def orders():
             medication_id = request.form['medication_id']
             quantity = request.form['quantity']
             unit_price = request.form['unit_price']
-            total_price = str(int(unit_price) * int(quantity))
+            total_price = str(float(unit_price) * int(quantity))
             date = request.form['date']
 
             print(type(date), date)
@@ -296,7 +316,6 @@ def update_medication():
     # Bring up new page with data auto-populated
     if request.method == 'GET':
         medication_id = request.args.get("medication_id")
-
         query = "SELECT * FROM `medications` WHERE `medication_id` = '%s';" % medication_id
         cursor = db.execute_query(db_connection, query)
         med = cursor.fetchone()  # fetchone vs fetchall?
@@ -312,7 +331,15 @@ def update_medication():
 
         query1 = "UPDATE medications SET drug_name = '%s', dosage_form = '%s', dose_number = '%s', dose_unit = '%s', quantity = '%s' WHERE medication_id = '%s';" % (
             drug_name, dosage_form, dose_number, dose_unit, quantity, medication_id)
-        db.execute_query(db_connection, query1)
+
+        try:
+            db.execute_query(db_connection, query1)
+        except:
+            flash("Error: duplicate entry")
+            query = "SELECT * FROM `medications` WHERE `medication_id` = '%s';" % medication_id
+            cursor = db.execute_query(db_connection, query)
+            med = cursor.fetchone()
+            return render_template('update-medication.html', med=med)
 
         # Fetch all
         query2 = "SELECT * FROM medications;"
@@ -325,7 +352,6 @@ def update_tech():
     # Bring up new page with data auto-populated
     if request.method == 'GET':
         employee_id = request.args.get("employee_id")
-
         query = "SELECT * FROM `pharmacy_technicians` WHERE `employee_id` = '%s';" % employee_id
         cursor = db.execute_query(db_connection, query)
         tech = cursor.fetchone()
@@ -338,7 +364,15 @@ def update_tech():
 
         query1 = "UPDATE pharmacy_technicians SET first_name = '%s', last_name = '%s' WHERE employee_id = '%s';" % (
             first_name, last_name, employee_id)
-        db.execute_query(db_connection, query1)
+
+        try:
+            db.execute_query(db_connection, query1)
+        except:
+            flash("Error: duplicate entry")
+            query = "SELECT * FROM `pharmacy_technicians` WHERE `employee_id` = '%s';" % employee_id
+            cursor = db.execute_query(db_connection, query)
+            tech = cursor.fetchone()
+            return render_template('update-tech.html', tech=tech)
 
         # Fetch all
         query2 = "SELECT * FROM pharmacy_technicians;"
@@ -351,7 +385,6 @@ def update_supplier():
     # Bring up new page with data auto-populated
     if request.method == 'GET':
         supplier_id = request.args.get("supplier_id")
-
         query = "SELECT * FROM `suppliers` WHERE `supplier_id` = '%s';" % supplier_id
         cursor = db.execute_query(db_connection, query)
         supply = cursor.fetchone()
@@ -365,7 +398,15 @@ def update_supplier():
 
         query1 = "UPDATE suppliers SET name = '%s', zip_code = '%s', phone = '%s' WHERE supplier_id = '%s';" % (
             name, zip_code, phone, supplier_id)
-        db.execute_query(db_connection, query1)
+
+        try:
+            db.execute_query(db_connection, query1)
+        except:
+            flash("Error: duplicate entry")
+            query = "SELECT * FROM `suppliers` WHERE `supplier_id` = '%s';" % supplier_id
+            cursor = db.execute_query(db_connection, query)
+            supply = cursor.fetchone()
+            return render_template('update-supplier.html', supply=supply)
 
         # Fetch all
         query2 = "SELECT * FROM suppliers;"
@@ -394,7 +435,15 @@ def update_patient():
         zip_code = request.form['zip_code']
 
         query1 = "UPDATE patients SET first_name = '%s', last_name = '%s', phone = '%s', street_number = '%s', street_name = '%s', zip_code = '%s' WHERE patient_id = '%s';" % (first_name, last_name, phone, street_number, street_name, zip_code, patient_id)
-        db.execute_query(db_connection, query1)
+
+        try:
+            db.execute_query(db_connection, query1)
+        except:
+            flash("Error: duplicate entry")
+            query = "SELECT * FROM `patients` WHERE `patient_id` = '%s';" % patient_id
+            cursor = db.execute_query(db_connection, query)
+            patient = cursor.fetchone()
+            return render_template('update-patient.html', patient=patient)
 
         # Fetch all
         query2 = "SELECT * FROM patients;"
