@@ -39,7 +39,7 @@ VALUES (:setPatientId, :setMedId, :setQuantity);
 SELECT * FROM purchase_orders;
 
 -- add a new purchase_orders
-INSERT INTO purchase_orders (supplier_id, employee_id, medication_id, quantity, unit_price, total_price,  date)
+INSERT INTO purchase_orders (supplier_id, employee_id, medication_id, quantity, unit_price, total_price,  date_ordered)
 VALUES (:setSupplierId, :setEmployeeId, :setMedId, :setQuantity, :setUnitPrice, :setQuantity*:setUnitPrice, :setDate);
 
 
