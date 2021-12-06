@@ -329,7 +329,19 @@ color: #FFFFFF;
 
 .error_message {
     background-color: #FDD26E;
-    color: red;
+    margin: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.error_message:before {
+  content:"";
+  background-color:#FDD26E;
+  position: absolute;
+  height: 25px;
+  width: 100000px;
+  left: -10000px;
+  z-index: -1;
 }
 
 #citation {
