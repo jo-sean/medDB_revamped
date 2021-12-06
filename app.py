@@ -289,17 +289,17 @@ def orders():
             quantity = request.form['quantity']
             unit_price = request.form['unit_price']
             total_price = str(float(unit_price) * int(quantity))
-            date = request.form['date']
+            date_ordered = request.form['date_ordered']
 
-            print(type(date), date)
+            print(type(date_ordered), date_ordered)
 
             if len(employee_id) == 0:
                 employee_id = 'NULL'
 
             # Define query and data
             query = "INSERT INTO `purchase_orders` (`supplier_id`, `employee_id`, `medication_id`, `quantity`, " \
-                    "`unit_price`, `total_price`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s);" % (
-                supplier_id, employee_id, medication_id, quantity, unit_price, total_price, date)
+                    "`unit_price`, `total_price`, `date_ordered`) VALUES (%s, %s, %s, %s, %s, %s, %s);" % (
+                supplier_id, employee_id, medication_id, quantity, unit_price, total_price, date_ordered)
 
             print(query)
 
