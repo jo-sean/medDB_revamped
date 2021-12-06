@@ -64,20 +64,21 @@
         </div>
 
 
-        <div>
+        <section>
             <div>
                 <h2 class="page-title">Add Supplier</h2>
             </div>
             <form action="/suppliers" method="post">
                 <fieldset>
                 <input class="input-attribute" type="text" placeholder="Enter supplier name" required name="name" required/>
-                <input class="input-attribute" type="number" min="0" placeholder="5 digit zip" required maxlength="5" minlength="5" name="zip_code"required/>
-                <input class="input-attribute" type="number" min="0" placeholder="Phone-no dashes" required name="phone" minlength="10" maxlength="10"required/>
+                <input class="input-attribute" type="text" pattern="[0-9]{5}" placeholder="5 digit zip" maxlength="5" minlength="5" name="zip_code"required/>
+                <input class="input-attribute" type="text" pattern="[0-9]{10}" placeholder="Phone-no dashes" name="phone" minlength="10" maxlength="10"required/>
             <div class="button-container">
                 <input type="submit" id="add_supplier" value="Add Supplier">
             </div>
             </fieldset>
             </form>
-        </div>
+        </section>
+<br>
 </body>
 </html>

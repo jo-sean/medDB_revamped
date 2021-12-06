@@ -34,11 +34,11 @@
         </section>
         <label>Zip</label>
         <section>
-            <input class="input-attribute" type="number" maxlength="5" name="zip_code" value="{{supply['zip_code']}}" required>
+            <input class="input-attribute" type="text" pattern="[0-9]{5}" minlength="5" maxlength="5" name="zip_code" value="{{supply['zip_code']}}" required>
         </section>
          <label>Phone</label>
         <section>
-            <input class="input-attribute" type="number" name="phone" maxlength="10" value="{{supply['phone']}}" required>
+            <input class="input-attribute" type="text" pattern="[0-9]{10}" name="phone" minlength="10" maxlength="10" value="{{supply['phone']}}" required>
         </section>
 
             <br>

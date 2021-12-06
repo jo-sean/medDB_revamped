@@ -145,6 +145,7 @@ def patients():
             data = (first_name, last_name, phone, street_number, street_name, zip_code)
 
             # Insert
+
             db.execute_query(db_connection, query, data)
 
         # After form submission -> reload same page
@@ -269,6 +270,8 @@ def orders():
             unit_price = request.form['unit_price']
             total_price = str(int(unit_price) * int(quantity))
             date = request.form['date']
+
+            print(type(date), date)
 
             if len(employee_id) == 0:
                 employee_id = 'NULL'

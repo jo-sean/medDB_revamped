@@ -55,7 +55,7 @@
 
             <label>Zip Code</label>
             <section>
-                <input class="input-attribute" type="number" name="zip_code" minlength="5" maxlength="5" value="{{patient['zip_code']}}" required>
+                <input class="input-attribute" type="text" name="zip_code" pattern="[0-9]{5}" minlength="5" maxlength="5" value="{{patient['zip_code']}}" required>
             </section>
 
             <br>

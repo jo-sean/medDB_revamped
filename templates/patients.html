@@ -82,17 +82,17 @@
             <fieldset>
             <input class="input-attribute" type="text" placeholder="first_name" name="first_name" required/>
             <input class="input-attribute" type="text" placeholder="last_name" name="last_name" required/>
-            <input class="input-attribute" type="number" min="0" minlength="10" maxlength="10" placeholder="phone" name="phone" required/>
+            <input class="input-attribute" type="text" pattern="[0-9]{10}" minlength="10" maxlength="10" placeholder="phone" name="phone" required/>
             <input class="input-attribute" type="number" min="0" placeholder="street_number" name="street_number" required/>
             <input class="input-attribute" type="text" placeholder="street_name" name="street_name" required/>
-            <input class="input-attribute" type="number" min="0" minlength="5" maxlength="5" placeholder="zip_code" name="zip_code" required/>
+            <input class="input-attribute" type="text" pattern="[0-9]{5}" minlength="5" maxlength="5" placeholder="zip_code" name="zip_code" required/>
             <div class="button-container">
                 <input type="submit" id="add_patients" value="Add Patient">
             </div>
                 </fieldset>
         </form>
     </section>
-
+<br>
 </body>
 
 </html>
