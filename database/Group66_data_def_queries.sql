@@ -139,7 +139,7 @@ CREATE TABLE `purchase_orders` (
     `quantity` int(11) NOT NULL,
     `unit_price` decimal(13,2) NOT NULL,
     `total_price` decimal(13,2) NOT NULL,
-    `date` date NOT NULL,
+    `date_ordered` date NOT NULL,
     -- CONSTRAINT `fk_PO_supplier_id`
     FOREIGN KEY (`supplier_id`) REFERENCES `suppliers`(`supplier_id`)
     ON DELETE CASCADE
@@ -157,7 +157,7 @@ CREATE TABLE `purchase_orders` (
 -- Insert sample data
 LOCK TABLES `purchase_orders` WRITE;
  
-INSERT INTO `purchase_orders` (`purchase_id`, `supplier_id`, `employee_id`, `medication_id`, `quantity`, `unit_price`, `total_price`, `date`)
+INSERT INTO `purchase_orders` (`purchase_id`, `supplier_id`, `employee_id`, `medication_id`, `quantity`, `unit_price`, `total_price`, `date_ordered`)
 VALUES (1, 2, 33, 1, 270, 0.10, 27.00, 2021-09-31), (2, 1, 30, 1, 120, 0.05, 6.00, 2021-10-17), (3, 3, 6, 3, 5, 1.25, 6.25, 2021-11-01);
  
 UNLOCK TABLES;
