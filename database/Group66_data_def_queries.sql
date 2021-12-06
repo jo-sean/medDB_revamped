@@ -157,6 +157,6 @@ CREATE TABLE `purchase_orders` (
 LOCK TABLES `purchase_orders` WRITE;
  
 INSERT INTO `purchase_orders` (`purchase_id`, `supplier_id`, `employee_id`, `medication_id`, `quantity`, `unit_price`, `total_price`, `date_ordered`)
-VALUES (1, 2, 33, 1, 270, 0.10, 27.00, '2021-09-31'), (2, 1, 30, 1, 120, 0.05, 6.00, '2021-10-17'), (3, 3, 6, 3, 5, 1.25, 6.25, '2021-11-01');
+VALUES (1, 2, 33, 1, 270, 0.10, 27.00, '2021-09-30'), (2, 1, 30, 1, 120, 0.05, 6.00, '2021-10-17'), (3, 3, 6, 3, 5, 1.25, 6.25, '2021-11-01');
  
 UNLOCK TABLES;
