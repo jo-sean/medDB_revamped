@@ -4,7 +4,7 @@
 -- **********************************************************************
  
 -- enter your database here to use
-USE `cs340_perejos`;
+-- USE `cs340_perejos`;
  
 -- DROP ALL TABLES IF THEY EXIST
 DROP TABLE IF EXISTS `purchase_orders`;
@@ -24,8 +24,9 @@ CREATE TABLE `medications` (
     `dosage_form` varchar(255) DEFAULT NULL,
     `dose_number` int(11) NOT NULL,
     `dose_unit` varchar(255) DEFAULT NULL,
-    `quantity` int(11) NOT NULL
-) ;
+    `quantity` int(11) NOT NULL,
+	UNIQUE (drug_name, dose_number)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 -- Insert sample data
 LOCK TABLES `medications` WRITE;
@@ -43,9 +44,10 @@ UNLOCK TABLES;
 CREATE TABLE `suppliers` (
   `supplier_id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `name` varchar(255) NOT NULL,
-  `zip_code` int(5) NOT NULL,
-  `phone` int(10) NULL
-);
+  `zip_code` int(6) NOT NULL,
+  `phone` bigint(11) NULL,
+   UNIQUE (name)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 -- Insert sample data
 LOCK TABLES `suppliers` WRITE;
@@ -63,11 +65,12 @@ CREATE TABLE `patients` (
   `patient_id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `phone` int(10) NOT NULL,
+  `phone` bigint(11) NOT NULL,
   `street_number` int(11) NOT NULL,
   `street_name` varchar(255) DEFAULT NULL,
-  `zip_code` int(5) NOT NULL
-);
+  `zip_code` int(6) NOT NULL,
+  UNIQUE (first_name, last_name)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 -- Insert sample data
 LOCK TABLES `patients` WRITE;
@@ -84,8 +87,9 @@ UNLOCK TABLES;
 CREATE TABLE `pharmacy_technicians` (
   `employee_id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL
-);
+  `last_name` varchar(255) NOT NULL,
+   UNIQUE (first_name, last_name)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 -- Insert sample data
 LOCK TABLES `pharmacy_technicians` WRITE;
@@ -105,14 +109,14 @@ CREATE TABLE `prescriptions` (
     `medication_id` int(11) NOT NULL,
     `quantity` varchar(255) DEFAULT NULL,
     -- CONSTRAINT `fk_prescriptions_patient_id`
-    FOREIGN KEY (`patient_id`) REFERENCES `patients`(`patient_id`),
-    -- ON DELETE CASCADE
-    -- ON UPDATE CASCADE,
+    FOREIGN KEY (`patient_id`) REFERENCES `patients`(`patient_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     -- CONSTRAINT `fk_prescriptions_medication_id`
     FOREIGN KEY (`medication_id`) REFERENCES `medications`(`medication_id`)
-    -- ON DELETE CASCADE
-    -- ON UPDATE CASCADE
-);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 -- Insert sample data
 LOCK TABLES `prescriptions` WRITE;
@@ -130,25 +134,25 @@ UNLOCK TABLES;
 CREATE TABLE `purchase_orders` (
     `purchase_id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `supplier_id` int(11) NOT NULL,
-    `employee_id` int(11) NOT NULL,
+    `employee_id` int(11),
     `medication_id` int(11) NOT NULL,
     `quantity` int(11) NOT NULL,
-    `unit_price` int(11) NOT NULL,
-    `total_price` int(11) NOT NULL,
+    `unit_price` decimal(13,2) NOT NULL,
+    `total_price` decimal(13,2) NOT NULL,
     `date` date NOT NULL,
     -- CONSTRAINT `fk_PO_supplier_id`
-    FOREIGN KEY (`supplier_id`) REFERENCES `suppliers`(`supplier_id`),
-    -- ON DELETE CASCADE
-    -- ON UPDATE CASCADE,
+    FOREIGN KEY (`supplier_id`) REFERENCES `suppliers`(`supplier_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     -- CONSTRAINT `fk_PO_employee_id`
-    FOREIGN KEY (`employee_id`) REFERENCES `pharmacy_technicians`(`employee_id`),
-    -- ON DELETE CASCADE
-    -- ON UPDATE CASCADE,
+    FOREIGN KEY (`employee_id`) REFERENCES `pharmacy_technicians`(`employee_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     -- CONSTRAINT `fk_PO_medication_id`
     FOREIGN KEY (`medication_id`) REFERENCES `medications`(`medication_id`)
-    -- ON DELETE CASCADE
-    -- ON UPDATE CASCADE
-);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
 -- Insert sample data
 LOCK TABLES `purchase_orders` WRITE;
@@ -157,8 +161,3 @@ INSERT INTO `purchase_orders` (`purchase_id`, `supplier_id`, `employee_id`, `med
 VALUES (1, 2, 33, 1, 270, 0.10, 27.00, 2021-09-31), (2, 1, 30, 1, 120, 0.05, 6.00, 2021-10-17), (3, 3, 6, 3, 5, 1.25, 6.25, 2021-11-01);
  
 UNLOCK TABLES;
- 
- 
- 
-
-
