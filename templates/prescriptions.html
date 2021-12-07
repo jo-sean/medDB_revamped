@@ -32,10 +32,10 @@
             </caption>
                 <thead>
                     <tr>
-                        <th>prescription_id</th>
-                        <th>patient_id</th>
-                        <th>medication_id</th>
-                        <th>quantity</th>
+                        <th>Rx ID</th>
+                        <th>Patient ID</th>
+                        <th>Med ID</th>
+                        <th>Quantity</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -48,7 +48,7 @@
                         <td>{{pres['quantity']}}</td>
                         <td>
                             <form action="/prescriptions" method="POST">
-                                <button type="submit" name="delete" value="{{ pres['prescription_id'] }}">Delete</button>
+                                <button id="alt-button" type="submit" name="delete" value="{{ pres['prescription_id'] }}">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -79,7 +79,7 @@
                 </select>
                 <input class="input-attribute" type="number" min="0" placeholder="Enter quantity" name="quantity" required/>
             <div class="button-container">
-                <input type="submit" id="add_prescription" value="Add Prescription">
+                <input class="alt-button" type="submit" id="add_prescription" value="Add Prescription">
             </div>
             </fieldset>
             </form>

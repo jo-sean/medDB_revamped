@@ -41,7 +41,7 @@
             <section>
                 <input class="input-attribute" type="number" name="dose_number" value="{{med['dose_number']}}" required>
             </section>
-            <label>Dose unit </label>
+            <label>Units </label>
             <section>
                 <input class="input-attribute" type="text" name="dose_unit" value="{{med['dose_unit']}}" required>
             </section>
@@ -52,8 +52,8 @@
 
             <br>
          <!-- <button name="update_medication" value="{{ med['medication_id'] }}" type="submit">Submit</button> -->
-       <input type="submit" value="Submit">
-        <button><a class="cancelToHome" href="/medications" role="button">Cancel</a></button>
+        <input class="update-button" type="submit" value="Submit">
+        <button class="update-button" ><a href="/medications" role="button">Cancel</a></button>
         </fieldset>
     </form>
     </section>

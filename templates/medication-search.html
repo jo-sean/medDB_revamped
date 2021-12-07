@@ -44,12 +44,12 @@
                 </caption>
                 <thead>
                     <tr>
-                        <th>medication_id</th>
-                        <th>drug_name</th>
-                        <th>dosage_form</th>
-                        <th>dose_number</th>
-                        <th>dose_unit</th>
-                        <th>quantity</th>
+                        <th>Med ID</th>
+                        <th>Drug Name</th>
+                        <th>Dosage Form</th>
+                        <th>Dose</th>
+                        <th>Units</th>
+                        <th>Quantity</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -66,20 +66,26 @@
                         <td>{{row['quantity']}}</td>
                         <td>
                             <form action="/update-medication" method="GET">
-                                <button type="submit" name="medication_id" value="{{ row['medication_id'] }}">Edit</button>
+                                <button id="alt-button" type="submit" name="medication_id" value="{{ row['medication_id'] }}">Edit</button>
                             </form>
                         </td>
                         <td>
                             <form action="/medications" method="POST">
-                                <button type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
+                                <button id="alt-button" type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
                             </form>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-
-        <button><a class="cancelToHome" href="/medications" role="button">Return to all Medications</a></button>
+        <br>
+        <form action="/medications" method="GET">
+        <button id="return-button" type="submit" value="Submit">
+            Return to all Medications
+        </button>
+        </form>
+<!--        <div><a class="cancelToHome" id="return-button" href="/medications" role="button">Return to all Medications</a></div>-->
+<!--        <button><a class="cancelToHome" id="search-button" href="/medications" role="button">Return to all Medications</a></button>-->
         </section>
 
 

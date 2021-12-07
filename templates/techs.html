@@ -44,9 +44,9 @@
             </caption>
             <thead>
                 <tr>
-                    <th>employee_id</th>
-                    <th>first_name</th>
-                    <th>last_name</th>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -59,12 +59,12 @@
                     <td>{{tech['last_name']}}</td>
                     <td>
                         <form action="/update-tech" method="GET">
-                            <button type="submit" name="employee_id" value="{{ tech['employee_id'] }}">Edit</button>
+                            <button class="alt-button" type="submit" name="employee_id" value="{{ tech['employee_id'] }}">Edit</button>
                         </form>
                     </td>
                     <td>
                         <form action="/techs" method="POST">
-                            <button type="submit" name="delete" value="{{ tech['employee_id'] }}">Delete</button>
+                            <button class="alt-button" type="submit" name="delete" value="{{ tech['employee_id'] }}">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -84,7 +84,7 @@
             <input class="input-attribute" type="text" placeholder="first_name" name="first_name" required/>
             <input class="input-attribute" type="text" placeholder="last_name" name="last_name" required/>
             <div class="button-container">
-                <input type="submit" id="add_tech" value="Add Pharm Tech">
+                <input class="alt-button" type="submit" id="add_tech" value="Add Pharm Tech">
             </div>
             </fieldset>
             </form>

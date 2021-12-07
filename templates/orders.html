@@ -42,18 +42,18 @@
     <section>
         <table id="orders">
             <caption>
-                purchase_orders
+                Orders
             </caption>
             <thead>
                 <tr>
-                    <th>purchase_id</th>
-                    <th>supplier_id</th>
-                    <th>employee_id</th>
-                    <th>medication_id</th>
-                    <th>quantity</th>
-                    <th>unit_price</th>
-                    <th>total_price</th>
-                    <th>date_ordered</th>
+                    <th>Purchase ID</th>
+                    <th>Supplier ID</th>
+                    <th>Employee ID</th>
+                    <th>Medication ID</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Cost</th>
+                    <th>Date</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -71,7 +71,7 @@
                         <td>{{row['date_ordered']}}</td>
                         <td>
                             <form action="/orders" method="POST">
-                                <button type="submit" name="delete" value="{{ row['purchase_id'] }}">Delete</button>
+                                <button id="alt-button" type="submit" name="delete" value="{{ row['purchase_id'] }}">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -113,7 +113,7 @@
             <input class="input-attribute" type="number" step="0.01" min="0" placeholder="Unit Price" name="unit_price" required>
             <input class="input-attribute" type="date" placeholder="date" name="date_ordered" required>
             <div class="button-container">
-                 <input type="submit" id="add_orders" value="Add Order">
+                 <input class="alt-button" type="submit" id="add_orders" value="Add Order">
             </div>
                 </fieldset>
         </form>

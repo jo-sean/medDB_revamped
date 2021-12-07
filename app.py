@@ -53,7 +53,7 @@ def medications():
             quantity = request.form['quantity']
 
             # Define query and data
-            query = "INSERT INTO `  medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
+            query = "INSERT INTO `medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
             data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
 
             # Insert
@@ -370,7 +370,10 @@ def update_tech():
             query = "SELECT * FROM `pharmacy_technicians` WHERE `employee_id` = '%s';" % employee_id
             cursor = db.execute_query(db_connection, query)
             tech = cursor.fetchone()
+            # print(query)
             return render_template('update-tech.html', tech=tech)
+
+
 
         # Fetch all
         query2 = "SELECT * FROM pharmacy_technicians;"

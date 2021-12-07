@@ -43,10 +43,10 @@
                 </caption>
                 <thead>
                     <tr>
-                        <th>supplier_id</th>
-                        <th>name</th>
-                        <th>zip_code</th>
-                        <th>phone</th>
+                        <th>Supplier ID</th>
+                        <th>Name</th>
+                        <th>Zip Code</th>
+                        <th>Phone</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -60,12 +60,12 @@
                         <td>{{supply['phone']}}</td>
                         <td>
                             <form action="/update-supplier" method="GET">
-                                <button type="submit" name="supplier_id" value="{{ supply['supplier_id'] }}">Edit</button>
+                                <button id="alt-button" type="submit" name="supplier_id" value="{{ supply['supplier_id'] }}">Edit</button>
                             </form>
                         </td>
                         <td>
                             <form action="/suppliers" method="POST">
-                                <button type="submit" name="delete" value="{{ supply['supplier_id'] }}">Delete</button>
+                                <button id="alt-button" type="submit" name="delete" value="{{ supply['supplier_id'] }}">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -86,7 +86,7 @@
                 <input class="input-attribute" type="text" pattern="[0-9]{5}" placeholder="5 digit zip" maxlength="5" minlength="5" name="zip_code"required/>
                 <input class="input-attribute" type="text" pattern="[0-9]{10}" placeholder="Phone-no dashes" name="phone" minlength="10" maxlength="10"required/>
             <div class="button-container">
-                <input type="submit" id="add_supplier" value="Add Supplier">
+                <input class="alt-button" type="submit" id="add_supplier" value="Add Supplier">
             </div>
             </fieldset>
             </form>

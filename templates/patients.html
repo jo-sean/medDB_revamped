@@ -47,13 +47,13 @@
             </caption>
             <thead>
                 <tr>
-                    <th>patient_id</th>
-                    <th>first_name</th>
-                    <th>last_name</th>
-                    <th>phone</th>
-                    <th>street_number</th>
-                    <th>street_name</th>
-                    <th>zip_code</th>
+                    <th>Patient ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Street Number</th>
+                    <th>Street Name</th>
+                    <th>Zip Code</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -70,12 +70,12 @@
                     <td>{{row['zip_code']}}</td>
                     <td>
                             <form action="/update-patient" method="GET">
-                                <button type="submit" name="patient_id" value="{{ row['patient_id'] }}">Edit</button>
+                                <button id="alt-button" type="submit" name="patient_id" value="{{ row['patient_id'] }}">Edit</button>
                             </form>
                         </td>
                     <td>
                         <form action="/patients" method="POST">
-                            <button type="submit" name="delete" value="{{ row['patient_id'] }}">Delete</button>
+                            <button id="alt-button" type="submit" name="delete" value="{{ row['patient_id'] }}">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -99,7 +99,7 @@
             <input class="input-attribute" type="text" placeholder="street_name" name="street_name" required/>
             <input class="input-attribute" type="text" pattern="[0-9]{5}" minlength="5" maxlength="5" placeholder="zip_code" name="zip_code" required/>
             <div class="button-container">
-                <input type="submit" id="add_patients" value="Add Patient">
+                <input class="alt-button" type="submit" id="add_patients" value="Add Patient">
             </div>
                 </fieldset>
         </form>
