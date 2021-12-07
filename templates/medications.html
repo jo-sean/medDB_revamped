@@ -11,13 +11,13 @@
     <div id="website-header">
         <h1>MedCount DB</h1>
         <nav>
-          <a class="nav-link" href="/">Home Page</a>|
-          <a class="nav-link" href="/medications">Medication Inventory</a> |
-          <a class="nav-link" href="/prescriptions">Prescriptions</a> |
-          <a class="nav-link" href="/orders">Purchase Orders</a> |
-          <a class="nav-link" href="/suppliers">Suppliers</a> |
-          <a class="nav-link" href="/patients">Patients</a> |
-          <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+            <a class="nav-link" href="/">Home Page</a>|
+            <a class="nav-link" href="/medications">Medication Inventory</a> |
+            <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+            <a class="nav-link" href="/orders">Purchase Orders</a> |
+            <a class="nav-link" href="/suppliers">Suppliers</a> |
+            <a class="nav-link" href="/patients">Patients</a> |
+            <a class="nav-link" href="/techs">Pharmacy Technicians</a>
         </nav>
     </div>
 
@@ -38,11 +38,11 @@
     </div>
     <div>
         <form action="/medication-search" method="POST">
-        <input class="search-med" type="text" placeholder="Name of medication" name="search" />
+            <input class="search-med" type="text" placeholder="Name of medication" name="search" />
 
-        <button id="search-button" type="submit" value="Submit">
-            Search
-        </button>
+            <button id="search-button" type="submit" value="Submit">
+                Search
+            </button>
         </form>
     </div>
 
@@ -50,49 +50,51 @@
         <div>
             <h2 class="page-title">Medications</h2>
         </div>
-            <table id="medications">
-                <caption>
-                    Medication Search Results
-                </caption>
-                <thead>
-                    <tr>
-                        <th>Med ID</th>
-                        <th>Drug Name</th>
-                        <th>Dosage Form</th>
-                        <th>Dose</th>
-                        <th>Units</th>
-                        <th>Quantity</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <table id="medications">
+            <caption>
+                Medication Search Results
+            </caption>
+            <thead>
+                <tr>
+                    <th>Med ID</th>
+                    <th>Drug Name</th>
+                    <th>Dosage Form</th>
+                    <th>Dose</th>
+                    <th>Units</th>
+                    <th>Quantity</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                    {% for row in med_info %}
-                    <tr>
-                        <td>{{row['medication_id']}}</td>
-                        <td>{{row['drug_name']}}</td>
-                        <td>{{row['dosage_form']}}</td>
-                        <td>{{row['dose_number']}}</td>
-                        <td>{{row['dose_unit']}}</td>
-                        <td>{{row['quantity']}}</td>
-                        <td>
-                            <form action="/update-medication" method="GET">
-                                <button type="submit" name="medication_id" value="{{ row['medication_id'] }}">Edit</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="/medications" method="POST">
-                                <button type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </section>
-
-        <<section>
+                {% for row in med_info %}
+                <tr>
+                    <td>{{row['medication_id']}}</td>
+                    <td>{{row['drug_name']}}</td>
+                    <td>{{row['dosage_form']}}</td>
+                    <td>{{row['dose_number']}}</td>
+                    <td>{{row['dose_unit']}}</td>
+                    <td>{{row['quantity']}}</td>
+                    <td>
+                        <form action="/update-medication" method="GET">
+                            <button class="alt-button" type="submit" name="medication_id"
+                                value="{{ row['medication_id'] }}">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/medications" method="POST">
+                            <button class="alt-button" type="submit" name="delete"
+                                value="{{ row['medication_id'] }}">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <br>
+    <section>
         <div>
             <h2 class="page-title">Add Medication</h2>
         </div>
@@ -112,12 +114,12 @@
                 </select>
                 <input class="input-attribute" type="number" min="0" placeholder="Quantity" name="quantity" required>
                 <div class="button-container">
-                    <input type="submit" id="add_meds" value="Add Medication">
+                    <input class="alt-button" type="submit" id="add_meds" value="Add Medication">
                 </div>
             </fieldset>
         </form>
     </section>
-<br>
+    <br>
 </body>
 
 </html>
