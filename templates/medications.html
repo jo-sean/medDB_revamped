@@ -92,15 +92,16 @@
             </table>
         </section>
 
-        <section>
-            <div>
-                <h2 class="page-title">Add Medication</h2>
-            </div>
-            <form action="/medications" method="post">
-                <fieldset>
-                <input class="input-attribute" type="text" placeholder="drug name" name="Drug Name" required>
-                <input class="input-attribute" type="text" placeholder="dose form" name="Dose Form" required>
-                <input class="input-attribute" type="number" min="0" placeholder="dose number" name="Dose Amount" required>
+        <<section>
+        <div>
+            <h2 class="page-title">Add Medication</h2>
+        </div>
+        <form action="/medications" method="post">
+            <fieldset>
+                <input class="input-attribute" type="text" placeholder="Drug Name" name="drug_name" required>
+                <input class="input-attribute" type="text" placeholder="Dose Form" name="dosage_form" required>
+                <input class="input-attribute" type="number" min="0" placeholder="Dose Amount" name="dose_number"
+                    required>
                 <select name="dose_unit" class="input-attribute" required>
                     <option value=""> -- Units -- </option>
                     <option value="mg"> mg </option>
@@ -113,8 +114,8 @@
                 <div class="button-container">
                     <input type="submit" id="add_meds" value="Add Medication">
                 </div>
-                    </fieldset>
-            </form>
+            </fieldset>
+        </form>
     </section>
 <br>
 </body>
