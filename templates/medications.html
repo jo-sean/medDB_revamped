@@ -21,15 +21,15 @@
         </nav>
     </div>
 
-       {% block content %}
+    {% block content %}
     <div>
-    {% for message in get_flashed_messages() %}
-    <div>
-       <p class="error_message">{{ message }}</p>
-    </div>
-    {% endfor %}
+        {% for message in get_flashed_messages() %}
+        <div>
+            <p class="error_message">{{ message }}</p>
+        </div>
+        {% endfor %}
 
-    {% block page_content %}{% endblock %}
+        {% block page_content %}{% endblock %}
     </div>
     {% endblock %}
 
@@ -56,12 +56,12 @@
                 </caption>
                 <thead>
                     <tr>
-                        <th>Med ID</th>
-                        <th>Drug Name</th>
-                        <th>Dosage Form</th>
-                        <th>Dose</th>
-                        <th>Units</th>
-                        <th>Quantity</th>
+                        <th>medication_id</th>
+                        <th>drug_name</th>
+                        <th>dosage_form</th>
+                        <th>dose_number</th>
+                        <th>dose_unit</th>
+                        <th>quantity</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -78,12 +78,12 @@
                         <td>{{row['quantity']}}</td>
                         <td>
                             <form action="/update-medication" method="GET">
-                                <button id="alt-button" type="submit" name="medication_id" value="{{ row['medication_id'] }}">Edit</button>
+                                <button type="submit" name="medication_id" value="{{ row['medication_id'] }}">Edit</button>
                             </form>
                         </td>
                         <td>
                             <form action="/medications" method="POST">
-                                <button id="alt-button" type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
+                                <button type="submit" name="delete" value="{{ row['medication_id'] }}">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -98,11 +98,10 @@
             </div>
             <form action="/medications" method="post">
                 <fieldset>
-                <input class="input-attribute" type="text" placeholder="Drug Name" name="drug_name" required>
-                <input class="input-attribute" type="text" placeholder="Dose Form" name="dosage_form" required>
-                <input class="input-attribute" type="number" min="0" placeholder="Dose Amount" name="dose_number" required>
-<!--                <input class="input-attribute" type="text" placeholder="dose unit" name="dose_unit" required>-->
-                    <select name="dose_unit" class="input-attribute" required>
+                <input class="input-attribute" type="text" placeholder="drug name" name="Drug Name" required>
+                <input class="input-attribute" type="text" placeholder="dose form" name="Dose Form" required>
+                <input class="input-attribute" type="number" min="0" placeholder="dose number" name="Dose Amount" required>
+                <select name="dose_unit" class="input-attribute" required>
                     <option value=""> -- Units -- </option>
                     <option value="mg"> mg </option>
                     <option value="mcg"> mcg </option>
@@ -112,7 +111,7 @@
                 </select>
                 <input class="input-attribute" type="number" min="0" placeholder="Quantity" name="quantity" required>
                 <div class="button-container">
-                    <input class="alt-button" type="submit" id="add_meds" value="Add Medication">
+                    <input type="submit" id="add_meds" value="Add Medication">
                 </div>
                     </fieldset>
             </form>
