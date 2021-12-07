@@ -362,7 +362,7 @@ color: #FFFFFF;
     text-align: center;
     display: block;
     margin: auto;
-    font-size 1.2rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
 }
@@ -375,7 +375,7 @@ color: #FFFFFF;
     text-align: center;
     display: block;
     margin: auto;
-    font-size 1.2rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
 }
@@ -388,7 +388,7 @@ color: #FFFFFF;
     text-align: center;
     display: block;
     margin: auto;
-    font-size 1.2rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
     padding: 5px 10px 5px 10px;
@@ -426,7 +426,7 @@ color: #FFFFFF;
     border: 2px solid #FDD26E;
     color: #000000;
     border-radius: 2px;
-    font-size 1.2rem;
+    font-size: 1.2rem;
     font-weight: bold;
     padding: 5px 10px 5px 10px;
 }
