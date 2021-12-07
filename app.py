@@ -56,6 +56,8 @@ def medications():
             query = "INSERT INTO `medications` (`drug_name`, `dosage_form`, `dose_number`, `dose_unit`, `quantity`) VALUES (%s, %s, %s, %s, %s);"
             data = (drug_name, dosage_form, dose_number, dose_unit, quantity)
 
+            print(query)
+
             # Insert
             try:
                 db.execute_query(db_connection, query, data)
